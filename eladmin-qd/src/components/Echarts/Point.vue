@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -118,7 +118,7 @@ export default {
                 }
               },
               lineStyle: {
-                normal: {curveness: 0.2}
+                normal: { curveness: 0.2 }
               }
             }, {
               source: '节点1',

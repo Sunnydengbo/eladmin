@@ -4,8 +4,15 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!--搜索-->
-        <el-input v-model="query.filename" class="filter-item" clearable placeholder="输入文件名" size="small"
-                  style="width: 200px;" @keyup.enter.native="crud.toQuery"/>
+        <el-input
+          v-model="query.filename"
+          class="filter-item"
+          clearable
+          placeholder="输入文件名"
+          size="small"
+          style="width: 200px;"
+          @keyup.enter.native="crud.toQuery"
+        />
         <el-date-picker
           v-model="query.createTime"
           :default-time="['00:00:00','23:59:59']"
@@ -17,7 +24,7 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <rrOperation/>
+        <rrOperation />
       </div>
       <crudOperation :permission="permission">
         <!-- 上传 -->
@@ -31,9 +38,13 @@
           @click="dialog = true"
         >上传
         </el-button>
-        <el-tooltip slot="right" class="item"
-                    content="使用同步功能需要在 https://sm.ms/login 中注册账号，并且在 application.yml 文件中修改 Secret Token" effect="dark"
-                    placement="top-start">
+        <el-tooltip
+          slot="right"
+          class="item"
+          content="使用同步功能需要在 https://sm.ms/login 中注册账号，并且在 application.yml 文件中修改 Secret Token"
+          effect="dark"
+          placement="top-start"
+        >
           <el-button
             v-permission="['admin','pictures:add']"
             :loading="syncLoading"
@@ -59,7 +70,7 @@
         :on-success="handleSuccess"
         list-type="picture-card"
       >
-        <i class="el-icon-plus"/>
+        <i class="el-icon-plus" />
       </el-upload>
       <el-dialog :visible.sync="dialogVisible" append-to-body>
         <img :src="dialogImageUrl" alt="" width="100%">
@@ -69,11 +80,16 @@
       </div>
     </el-dialog>
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-              @selection-change="crud.selectionChangeHandler">
-      <el-table-column type="selection" width="55"/>
-      <el-table-column label="文件名" prop="filename" width="200"/>
-      <el-table-column label="上传者" prop="username"/>
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      style="width: 100%;"
+      @selection-change="crud.selectionChangeHandler"
+    >
+      <el-table-column type="selection" width="55" />
+      <el-table-column label="文件名" prop="filename" width="200" />
+      <el-table-column label="上传者" prop="username" />
       <el-table-column ref="table" :show-overflow-tooltip="true" label="缩略图" prop="url">
         <template slot-scope="{row}">
           <el-image
@@ -85,9 +101,9 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="文件大小" prop="size"/>
-      <el-table-column label="高度" prop="height"/>
-      <el-table-column label="宽度" prop="width"/>
+      <el-table-column label="文件大小" prop="size" />
+      <el-table-column label="高度" prop="height" />
+      <el-table-column label="宽度" prop="width" />
       <el-table-column label="创建日期" prop="createTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -95,24 +111,24 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import crudPic from '@/api/tools/picture'
-import CRUD, {crud, header, presenter} from '@crud/crud'
-import {getToken} from '@/utils/auth'
+import CRUD, { crud, header, presenter } from '@crud/crud'
+import { getToken } from '@/utils/auth'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import pagination from '@crud/Pagination'
 
 export default {
   name: 'Pictures',
-  components: {pagination, crudOperation, rrOperation},
+  components: { pagination, crudOperation, rrOperation },
   cruds() {
-    return CRUD({title: '图片', url: 'api/pictures', crudMethod: {...crudPic}})
+    return CRUD({ title: '图片', url: 'api/pictures', crudMethod: { ...crudPic }})
   },
   mixins: [presenter(), header(), crud()],
   data() {
@@ -144,7 +160,7 @@ export default {
     handleSuccess(response, file, fileList) {
       const uid = file.uid
       const id = response.id
-      this.pictures.push({uid, id})
+      this.pictures.push({ uid, id })
     },
     handleBeforeRemove(file, fileList) {
       for (let i = 0; i < this.pictures.length; i++) {

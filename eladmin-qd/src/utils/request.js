@@ -1,8 +1,8 @@
 import axios from 'axios'
 import router from '@/router/routers'
-import {MessageBox, Notification} from 'element-ui'
+import { MessageBox, Notification } from 'element-ui'
 import store from '../store'
-import {getToken} from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 import Config from '@/settings'
 
 // 创建axios实例
@@ -69,7 +69,7 @@ service.interceptors.response.use(
           })
         })
       } else if (code === 403) {
-        router.push({path: '/401'})
+        router.push({ path: '/401' })
       } else {
         const errorMsg = error.response.data.message
         if (errorMsg !== undefined) {

@@ -9,18 +9,18 @@
     </p>
     <el-row :gutter="10">
       <el-col :lg="15" :md="15" :sm="24" :xl="15" :xs="24">
-        <div ref="editor" class="text"/>
+        <div ref="editor" class="text" />
       </el-col>
       <el-col :lg="9" :md="9" :sm="24" :xl="9" :xs="24">
-        <div v-html="editorContent"/>
+        <div v-html="editorContent" />
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import {upload} from '@/utils/upload'
+import { mapGetters } from 'vuex'
+import { upload } from '@/utils/upload'
 import E from 'wangeditor'
 
 export default {
@@ -46,7 +46,7 @@ export default {
     // 自定义菜单配置
     editor.customConfig.zIndex = 10
     // 文件上传
-    editor.customConfig.customUploadImg = function (files, insert) {
+    editor.customConfig.customUploadImg = function(files, insert) {
       // files 是 input 中选中的文件列表
       // insert 是获取图片 url 后，插入到编辑器的方法
       files.forEach(image => {

@@ -4,5 +4,5 @@ const lang = {
   education: 'ประวัติการศึกษา',
   skills: 'ทักษะและความสามารถ',
   about: 'ข้อมูลส่วนตัว'
-};
-export default lang;
+}
+export default lang

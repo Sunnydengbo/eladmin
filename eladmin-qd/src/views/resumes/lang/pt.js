@@ -7,5 +7,5 @@ const lang = {
   projects: 'Projetos',
   contributions: 'Contribuições',
   about: 'Sobre mim'
-};
-export default lang;
+}
+export default lang

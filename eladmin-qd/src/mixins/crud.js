@@ -1,5 +1,5 @@
-import {download, initData} from '@/api/data'
-import {downloadFile, parseTime} from '@/utils/index'
+import { download, initData } from '@/api/data'
+import { downloadFile, parseTime } from '@/utils/index'
 import checkPermission from '@/utils/permission'
 
 export default {
@@ -70,7 +70,7 @@ export default {
     beforeInit() {
       return true
     },
-    getQueryParame: function () {
+    getQueryParame: function() {
       return {
         page: this.page,
         size: this.size,

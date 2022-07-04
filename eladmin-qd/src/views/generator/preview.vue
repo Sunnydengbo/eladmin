@@ -1,18 +1,18 @@
 <template>
   <el-tabs v-model="activeName" type="card">
     <el-tab-pane v-for="item in data" :key="item.name" :label="item.name" :lazy="true" :name="item.name">
-      <Java :height="height" :value="item.content"/>
+      <Java :height="height" :value="item.content" />
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
 import Java from '@/components/JavaEdit/index'
-import {generator} from '@/api/generator/generator'
+import { generator } from '@/api/generator/generator'
 
 export default {
   name: 'Preview',
-  components: {Java},
+  components: { Java },
   data() {
     return {
       data: null, height: '', activeName: 'Entity'

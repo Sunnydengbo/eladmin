@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -68,11 +68,11 @@ export default {
             radius: [15, 95],
             center: ['50%', '38%'],
             data: [
-              {value: 320, name: 'Industries'},
-              {value: 240, name: 'Technology'},
-              {value: 149, name: 'Forex'},
-              {value: 100, name: 'Gold'},
-              {value: 59, name: 'Forecasts'}
+              { value: 320, name: 'Industries' },
+              { value: 240, name: 'Technology' },
+              { value: 149, name: 'Forex' },
+              { value: 100, name: 'Gold' },
+              { value: 59, name: 'Forecasts' }
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600

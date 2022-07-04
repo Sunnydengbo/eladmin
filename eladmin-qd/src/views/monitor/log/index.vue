@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="head-container">
-      <Search/>
+      <Search />
       <crudOperation>
         <el-button
           slot="left"
@@ -17,8 +17,13 @@
       </crudOperation>
     </div>
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-              @selection-change="crud.selectionChangeHandler">
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      style="width: 100%;"
+      @selection-change="crud.selectionChangeHandler"
+    >
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form class="demo-table-expand" inline label-position="left">
@@ -31,11 +36,11 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="用户名" prop="username"/>
-      <el-table-column label="IP" prop="requestIp"/>
-      <el-table-column :show-overflow-tooltip="true" label="IP来源" prop="address"/>
-      <el-table-column label="描述" prop="description"/>
-      <el-table-column label="浏览器" prop="browser"/>
+      <el-table-column label="用户名" prop="username" />
+      <el-table-column label="IP" prop="requestIp" />
+      <el-table-column :show-overflow-tooltip="true" label="IP来源" prop="address" />
+      <el-table-column label="描述" prop="description" />
+      <el-table-column label="浏览器" prop="browser" />
       <el-table-column align="center" label="请求耗时" prop="time">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.time <= 300">{{ scope.row.time }}ms</el-tag>
@@ -50,22 +55,22 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
   </div>
 </template>
 
 <script>
 import Search from './search'
-import {delAllInfo} from '@/api/monitor/log'
-import CRUD, {presenter} from '@crud/crud'
+import { delAllInfo } from '@/api/monitor/log'
+import CRUD, { presenter } from '@crud/crud'
 import crudOperation from '@crud/CRUD.operation'
 import pagination from '@crud/Pagination'
 
 export default {
   name: 'Log',
-  components: {Search, crudOperation, pagination},
+  components: { Search, crudOperation, pagination },
   cruds() {
-    return CRUD({title: '日志', url: 'api/logs'})
+    return CRUD({ title: '日志', url: 'api/logs' })
   },
   mixins: [presenter()],
   created() {

@@ -49,4 +49,4 @@ export function edit(data) {
   })
 }
 
-export default {add, edit, del}
+export default { add, edit, del }

@@ -9,8 +9,12 @@
           <div>
             <div style="text-align: center">
               <div class="el-upload">
-                <img :src="user.avatarName ? baseApi + '/avatar/' + user.avatarName : Avatar" class="avatar"
-                     title="点击上传头像" @click="toggleShow">
+                <img
+                  :src="user.avatarName ? baseApi + '/avatar/' + user.avatarName : Avatar"
+                  class="avatar"
+                  title="点击上传头像"
+                  @click="toggleShow"
+                >
                 <myUpload
                   v-model="show"
                   :headers="headers"
@@ -22,33 +26,33 @@
             <ul class="user-info">
               <li>
                 <div style="height: 100%">
-                  <svg-icon icon-class="login"/>
+                  <svg-icon icon-class="login" />
                   登录账号
                   <div class="user-right">{{ user.username }}</div>
                 </div>
               </li>
               <li>
-                <svg-icon icon-class="user1"/>
+                <svg-icon icon-class="user1" />
                 用户昵称
                 <div class="user-right">{{ user.nickName }}</div>
               </li>
               <li>
-                <svg-icon icon-class="dept"/>
+                <svg-icon icon-class="dept" />
                 所属部门
                 <div class="user-right"> {{ user.dept.name }}</div>
               </li>
               <li>
-                <svg-icon icon-class="phone"/>
+                <svg-icon icon-class="phone" />
                 手机号码
                 <div class="user-right">{{ user.phone }}</div>
               </li>
               <li>
-                <svg-icon icon-class="email"/>
+                <svg-icon icon-class="email" />
                 用户邮箱
                 <div class="user-right">{{ user.email }}</div>
               </li>
               <li>
-                <svg-icon icon-class="anq"/>
+                <svg-icon icon-class="anq" />
                 安全设置
                 <div class="user-right">
                   <a @click="$refs.pass.dialog = true">修改密码</a>
@@ -64,14 +68,20 @@
         <el-card class="box-card">
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="用户资料" name="first">
-              <el-form ref="form" :model="form" :rules="rules" label-width="65px" size="small"
-                       style="margin-top: 10px;">
+              <el-form
+                ref="form"
+                :model="form"
+                :rules="rules"
+                label-width="65px"
+                size="small"
+                style="margin-top: 10px;"
+              >
                 <el-form-item label="昵称" prop="nickName">
-                  <el-input v-model="form.nickName" style="width: 35%"/>
+                  <el-input v-model="form.nickName" style="width: 35%" />
                   <span style="color: #C0C0C0;margin-left: 10px;">用户昵称不作为登录使用</span>
                 </el-form-item>
                 <el-form-item label="手机号" prop="phone">
-                  <el-input v-model="form.phone" style="width: 35%;"/>
+                  <el-input v-model="form.phone" style="width: 35%;" />
                   <span style="color: #C0C0C0;margin-left: 10px;">手机号码不能重复</span>
                 </el-form-item>
                 <el-form-item label="性别">
@@ -88,10 +98,10 @@
             <!--    操作日志    -->
             <el-tab-pane label="操作日志" name="second">
               <el-table v-loading="loading" :data="data" style="width: 100%;">
-                <el-table-column label="行为" prop="description"/>
-                <el-table-column label="IP" prop="requestIp"/>
-                <el-table-column :show-overflow-tooltip="true" label="IP来源" prop="address"/>
-                <el-table-column label="浏览器" prop="browser"/>
+                <el-table-column label="行为" prop="description" />
+                <el-table-column label="IP" prop="requestIp" />
+                <el-table-column :show-overflow-tooltip="true" label="IP来源" prop="address" />
+                <el-table-column label="浏览器" prop="browser" />
                 <el-table-column align="center" label="请求耗时" prop="time">
                   <template slot-scope="scope">
                     <el-tag v-if="scope.row.time <= 300">{{ scope.row.time }}ms</el-tag>
@@ -104,7 +114,9 @@
                 >
                   <template slot="header">
                     <div style="display:inline-block;float: right;cursor: pointer" @click="init">创建日期<i
-                      class="el-icon-refresh" style="margin-left: 40px"/></div>
+                      class="el-icon-refresh"
+                      style="margin-left: 40px"
+                    /></div>
                   </template>
                   <template slot-scope="scope">
                     <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -125,27 +137,27 @@
         </el-card>
       </el-col>
     </el-row>
-    <updateEmail ref="email" :email="user.email"/>
-    <updatePass ref="pass"/>
+    <updateEmail ref="email" :email="user.email" />
+    <updatePass ref="pass" />
   </div>
 </template>
 
 <script>
 import myUpload from 'vue-image-crop-upload'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import updatePass from './center/updatePass'
 import updateEmail from './center/updateEmail'
-import {getToken} from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 import store from '@/store'
-import {isvalidPhone} from '@/utils/validate'
-import {parseTime} from '@/utils/index'
+import { isvalidPhone } from '@/utils/validate'
+import { parseTime } from '@/utils/index'
 import crud from '@/mixins/crud'
-import {editUser} from '@/api/system/user'
+import { editUser } from '@/api/system/user'
 import Avatar from '@/assets/images/avatar.png'
 
 export default {
   name: 'Center',
-  components: {updatePass, updateEmail, myUpload},
+  components: { updatePass, updateEmail, myUpload },
   mixins: [crud],
   data() {
     // 自定义验证
@@ -169,11 +181,11 @@ export default {
       form: {},
       rules: {
         nickName: [
-          {required: true, message: '请输入用户昵称', trigger: 'blur'},
-          {min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur'}
+          { required: true, message: '请输入用户昵称', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
         phone: [
-          {required: true, trigger: 'blur', validator: validPhone}
+          { required: true, trigger: 'blur', validator: validPhone }
         ]
       }
     }
@@ -186,7 +198,7 @@ export default {
     ])
   },
   created() {
-    this.form = {id: this.user.id, nickName: this.user.nickName, gender: this.user.gender, phone: this.user.phone}
+    this.form = { id: this.user.id, nickName: this.user.nickName, gender: this.user.gender, phone: this.user.phone }
     store.dispatch('GetInfo').then(() => {
     })
   },

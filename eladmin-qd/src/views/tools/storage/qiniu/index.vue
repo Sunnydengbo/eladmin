@@ -1,13 +1,20 @@
 <template>
   <div class="app-container" style="padding: 8px;">
     <!--表单组件-->
-    <eForm ref="form"/>
+    <eForm ref="form" />
     <!-- 工具栏 -->
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.key" class="filter-item" clearable placeholder="输入文件名称搜索" size="small"
-                  style="width: 200px;" @keyup.enter.native="toQuery"/>
+        <el-input
+          v-model="query.key"
+          class="filter-item"
+          clearable
+          placeholder="输入文件名称搜索"
+          size="small"
+          style="width: 200px;"
+          @keyup.enter.native="toQuery"
+        />
         <el-date-picker
           v-model="query.c"
           :default-time="['00:00:00','23:59:59']"
@@ -19,7 +26,7 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <rrOperation/>
+        <rrOperation />
       </div>
       <crudOperation :permission="permission">
         <template slot="left">
@@ -59,20 +66,34 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-                @selection-change="crud.selectionChangeHandler">
-        <el-table-column type="selection" width="55"/>
+      <el-table
+        ref="table"
+        v-loading="crud.loading"
+        :data="crud.data"
+        style="width: 100%;"
+        @selection-change="crud.selectionChangeHandler"
+      >
+        <el-table-column type="selection" width="55" />
         <el-table-column :show-overflow-tooltip="true" label="文件名" prop="name">
           <template slot-scope="scope">
-            <a class="el-link el-link--primary" href="JavaScript:" target="_blank" type="primary"
-               @click="download(scope.row.id)">{{ scope.row.key }}</a>
+            <a
+              class="el-link el-link--primary"
+              href="JavaScript:"
+              target="_blank"
+              type="primary"
+              @click="download(scope.row.id)"
+            >{{ scope.row.key }}</a>
           </template>
         </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" label="文件类型" prop="suffix"
-                         @selection-change="crud.selectionChangeHandler"/>
-        <el-table-column label="空间名称" prop="bucket"/>
-        <el-table-column label="文件大小" prop="size"/>
-        <el-table-column label="空间类型" prop="type"/>
+        <el-table-column
+          :show-overflow-tooltip="true"
+          label="文件类型"
+          prop="suffix"
+          @selection-change="crud.selectionChangeHandler"
+        />
+        <el-table-column label="空间名称" prop="bucket" />
+        <el-table-column label="文件大小" prop="size" />
+        <el-table-column label="空间类型" prop="type" />
         <el-table-column label="创建日期" prop="updateTime">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.updateTime) }}</span>
@@ -80,25 +101,25 @@
         </el-table-column>
       </el-table>
       <!--分页组件-->
-      <pagination/>
+      <pagination />
     </div>
   </div>
 </template>
 
 <script>
 import crudQiNiu from '@/api/tools/qiniu'
-import {mapGetters} from 'vuex'
-import {getToken} from '@/utils/auth'
+import { mapGetters } from 'vuex'
+import { getToken } from '@/utils/auth'
 import eForm from './form'
-import CRUD, {crud, header, presenter} from '@crud/crud'
+import CRUD, { crud, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import pagination from '@crud/Pagination'
 
 export default {
-  components: {eForm, pagination, crudOperation, rrOperation},
+  components: { eForm, pagination, crudOperation, rrOperation },
   cruds() {
-    return CRUD({title: '七牛云文件', url: 'api/qiNiuContent', crudMethod: {...crudQiNiu}})
+    return CRUD({ title: '七牛云文件', url: 'api/qiNiuContent', crudMethod: { ...crudQiNiu }})
   },
   mixins: [presenter(), header(), crud()],
   data() {
@@ -108,7 +129,7 @@ export default {
       },
       title: '文件', dialog: false,
       icon: 'el-icon-refresh',
-      url: '', headers: {'Authorization': getToken()},
+      url: '', headers: { 'Authorization': getToken() },
       dialogImageUrl: '', dialogVisible: false, fileList: [], files: [], newWin: null
     }
   },
@@ -142,7 +163,7 @@ export default {
     handleSuccess(response, file, fileList) {
       const uid = file.uid
       const id = response.id
-      this.files.push({uid, id})
+      this.files.push({ uid, id })
     },
     handleBeforeRemove(file, fileList) {
       for (let i = 0; i < this.files.length; i++) {

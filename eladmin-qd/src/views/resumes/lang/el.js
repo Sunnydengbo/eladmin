@@ -4,5 +4,5 @@ const lang = {
   education: 'Εκπαίδευση',
   skills: 'Δεξιότητες',
   about: 'Σχετικά με εμένα'
-};
-export default lang;
+}
+export default lang

@@ -26,13 +26,13 @@ export default {
   },
   watch: {
     defaultTheme: {
-      handler: function (val, oldVal) {
+      handler: function(val, oldVal) {
         this.theme = val
       },
       immediate: true
     },
     async theme(val) {
-      Cookies.set('theme', val, {expires: 365})
+      Cookies.set('theme', val, { expires: 365 })
       const oldVal = this.chalk ? this.theme : Cookies.get('theme') ? Cookies.get('theme') : ORIGINAL_THEME
       if (typeof val !== 'string') return
       const themeCluster = this.getThemeCluster(val.replace('#', ''))
@@ -68,7 +68,7 @@ export default {
           return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
         })
       styles.forEach(style => {
-        const {innerText} = style
+        const { innerText } = style
         if (typeof innerText !== 'string') return
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
       })

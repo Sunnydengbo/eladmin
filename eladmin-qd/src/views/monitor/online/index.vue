@@ -2,9 +2,16 @@
   <div class="app-container">
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
-        <el-input v-model="query.filter" class="filter-item" clearable placeholder="全表模糊搜索" size="small"
-                  style="width: 200px;" @keyup.enter.native="crud.toQuery"/>
-        <rrOperation/>
+        <el-input
+          v-model="query.filter"
+          class="filter-item"
+          clearable
+          placeholder="全表模糊搜索"
+          size="small"
+          style="width: 200px;"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <rrOperation />
       </div>
       <crudOperation>
         <el-button
@@ -22,15 +29,20 @@
       </crudOperation>
     </div>
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-              @selection-change="crud.selectionChangeHandler">
-      <el-table-column type="selection" width="55"/>
-      <el-table-column label="用户名" prop="userName"/>
-      <el-table-column label="用户昵称" prop="nickName"/>
-      <el-table-column label="部门" prop="dept"/>
-      <el-table-column label="登录IP" prop="ip"/>
-      <el-table-column :show-overflow-tooltip="true" label="登录地点" prop="address"/>
-      <el-table-column label="浏览器" prop="browser"/>
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      style="width: 100%;"
+      @selection-change="crud.selectionChangeHandler"
+    >
+      <el-table-column type="selection" width="55" />
+      <el-table-column label="用户名" prop="userName" />
+      <el-table-column label="用户昵称" prop="nickName" />
+      <el-table-column label="部门" prop="dept" />
+      <el-table-column label="登录IP" prop="ip" />
+      <el-table-column :show-overflow-tooltip="true" label="登录地点" prop="address" />
+      <el-table-column label="浏览器" prop="browser" />
       <el-table-column label="登录时间" prop="loginTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.loginTime) }}</span>
@@ -47,8 +59,12 @@
             <p>确定强制退出该用户吗？</p>
             <div style="text-align: right; margin: 0">
               <el-button size="mini" type="text" @click="$refs[scope.$index].doClose()">取消</el-button>
-              <el-button :loading="delLoading" size="mini" type="primary"
-                         @click="delMethod(scope.row.key, scope.$index)">确定
+              <el-button
+                :loading="delLoading"
+                size="mini"
+                type="primary"
+                @click="delMethod(scope.row.key, scope.$index)"
+              >确定
               </el-button>
             </div>
             <el-button slot="reference" size="mini" type="text">强退</el-button>
@@ -57,22 +73,22 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
   </div>
 </template>
 
 <script>
-import {del} from '@/api/monitor/online'
-import CRUD, {crud, header, presenter} from '@crud/crud'
+import { del } from '@/api/monitor/online'
+import CRUD, { crud, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import pagination from '@crud/Pagination'
 
 export default {
   name: 'OnlineUser',
-  components: {pagination, crudOperation, rrOperation},
+  components: { pagination, crudOperation, rrOperation },
   cruds() {
-    return CRUD({url: 'auth/online', title: '在线用户'})
+    return CRUD({ url: 'auth/online', title: '在线用户' })
   },
   mixins: [presenter(), header(), crud()],
   data() {

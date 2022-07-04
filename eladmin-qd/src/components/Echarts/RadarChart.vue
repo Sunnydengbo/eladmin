@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -73,12 +73,12 @@ export default {
             }
           },
           indicator: [
-            {name: 'Sales', max: 10000},
-            {name: 'Administration', max: 20000},
-            {name: 'Information Techology', max: 20000},
-            {name: 'Customer Support', max: 20000},
-            {name: 'Development', max: 20000},
-            {name: 'Marketing', max: 20000}
+            { name: 'Sales', max: 10000 },
+            { name: 'Administration', max: 20000 },
+            { name: 'Information Techology', max: 20000 },
+            { name: 'Customer Support', max: 20000 },
+            { name: 'Development', max: 20000 },
+            { name: 'Marketing', max: 20000 }
           ]
         },
         legend: {

@@ -65,25 +65,31 @@
                 :value="item.key"
               />
             </el-select>
-            <rrOperation/>
+            <rrOperation />
           </div>
-          <crudOperation :permission="permission" show=""/>
+          <crudOperation :permission="permission" show="" />
         </div>
         <!--表单渲染-->
-        <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.title"
-                   :visible.sync="crud.status.cu > 0" append-to-body width="570px">
+        <el-dialog
+          :before-close="crud.cancelCU"
+          :close-on-click-modal="false"
+          :title="crud.status.title"
+          :visible.sync="crud.status.cu > 0"
+          append-to-body
+          width="570px"
+        >
           <el-form ref="form" :inline="true" :model="form" :rules="rules" label-width="66px" size="small">
             <el-form-item label="用户名" prop="username">
-              <el-input v-model="form.username"/>
+              <el-input v-model="form.username" />
             </el-form-item>
             <el-form-item label="电话" prop="phone">
-              <el-input v-model.number="form.phone"/>
+              <el-input v-model.number="form.phone" />
             </el-form-item>
             <el-form-item label="昵称" prop="nickName">
-              <el-input v-model="form.nickName"/>
+              <el-input v-model="form.nickName" />
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
-              <el-input v-model="form.email"/>
+              <el-input v-model="form.email" />
             </el-form-item>
             <el-form-item label="部门" prop="dept.id">
               <treeselect
@@ -152,14 +158,19 @@
           </div>
         </el-dialog>
         <!--表格渲染-->
-        <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-                  @selection-change="crud.selectionChangeHandler">
-          <el-table-column :selectable="checkboxT" type="selection" width="55"/>
-          <el-table-column :show-overflow-tooltip="true" label="用户名" prop="username"/>
-          <el-table-column :show-overflow-tooltip="true" label="昵称" prop="nickName"/>
-          <el-table-column label="性别" prop="gender"/>
-          <el-table-column :show-overflow-tooltip="true" label="电话" prop="phone" width="100"/>
-          <el-table-column :show-overflow-tooltip="true" label="邮箱" prop="email" width="135"/>
+        <el-table
+          ref="table"
+          v-loading="crud.loading"
+          :data="crud.data"
+          style="width: 100%;"
+          @selection-change="crud.selectionChangeHandler"
+        >
+          <el-table-column :selectable="checkboxT" type="selection" width="55" />
+          <el-table-column :show-overflow-tooltip="true" label="用户名" prop="username" />
+          <el-table-column :show-overflow-tooltip="true" label="昵称" prop="nickName" />
+          <el-table-column label="性别" prop="gender" />
+          <el-table-column :show-overflow-tooltip="true" label="电话" prop="phone" width="100" />
+          <el-table-column :show-overflow-tooltip="true" label="邮箱" prop="email" width="135" />
           <el-table-column :show-overflow-tooltip="true" label="部门" prop="dept">
             <template slot-scope="scope">
               <div>{{ scope.row.dept.name }}</div>
@@ -198,7 +209,7 @@
           </el-table-column>
         </el-table>
         <!--分页组件-->
-        <pagination/>
+        <pagination />
       </el-col>
     </el-row>
   </div>
@@ -206,17 +217,17 @@
 
 <script>
 import crudUser from '@/api/system/user'
-import {isvalidPhone} from '@/utils/validate'
-import {getDepts, getDeptSuperior} from '@/api/system/dept'
-import {getAll, getLevel} from '@/api/system/role'
-import {getAllJob} from '@/api/system/job'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import { isvalidPhone } from '@/utils/validate'
+import { getDepts, getDeptSuperior } from '@/api/system/dept'
+import { getAll, getLevel } from '@/api/system/role'
+import { getAllJob } from '@/api/system/job'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
-import Treeselect, {LOAD_CHILDREN_OPTIONS} from '@riophae/vue-treeselect'
-import {mapGetters} from 'vuex'
+import Treeselect, { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
+import { mapGetters } from 'vuex'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 let userRoles = []
@@ -230,14 +241,14 @@ const defaultForm = {
   enabled: 'false',
   roles: [],
   jobs: [],
-  dept: {id: null},
+  dept: { id: null },
   phone: null
 }
 export default {
   name: 'User',
-  components: {Treeselect, crudOperation, rrOperation, udOperation, pagination},
+  components: { Treeselect, crudOperation, rrOperation, udOperation, pagination },
   cruds() {
-    return CRUD({title: '用户', url: 'api/users', crudMethod: {...crudUser}})
+    return CRUD({ title: '用户', url: 'api/users', crudMethod: { ...crudUser }})
   },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   // 数据字典
@@ -256,31 +267,31 @@ export default {
     return {
       height: document.documentElement.clientHeight - 180 + 'px;',
       deptName: '', depts: [], deptDatas: [], jobs: [], level: 3, roles: [],
-      defaultProps: {children: 'children', label: 'name', isLeaf: 'leaf'},
+      defaultProps: { children: 'children', label: 'name', isLeaf: 'leaf' },
       permission: {
         add: ['admin', 'user:add'],
         edit: ['admin', 'user:edit'],
         del: ['admin', 'user:del']
       },
       enabledTypeOptions: [
-        {key: 'true', display_name: '激活'},
-        {key: 'false', display_name: '锁定'}
+        { key: 'true', display_name: '激活' },
+        { key: 'false', display_name: '锁定' }
       ],
       rules: {
         username: [
-          {required: true, message: '请输入用户名', trigger: 'blur'},
-          {min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur'}
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
         nickName: [
-          {required: true, message: '请输入用户昵称', trigger: 'blur'},
-          {min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur'}
+          { required: true, message: '请输入用户昵称', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
         email: [
-          {required: true, message: '请输入邮箱地址', trigger: 'blur'},
-          {type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
+          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
         ],
         phone: [
-          {required: true, trigger: 'blur', validator: validPhone}
+          { required: true, trigger: 'blur', validator: validPhone }
         ]
       }
     }
@@ -293,7 +304,7 @@ export default {
   created() {
     this.crud.msg.add = '新增成功，默认密码：123456'
   },
-  mounted: function () {
+  mounted: function() {
     const that = this
     window.onresize = function temp() {
       that.height = document.documentElement.clientHeight - 180 + 'px;'
@@ -302,15 +313,15 @@ export default {
   methods: {
     changeRole(value) {
       userRoles = []
-      value.forEach(function (data, index) {
-        const role = {id: data}
+      value.forEach(function(data, index) {
+        const role = { id: data }
         userRoles.push(role)
       })
     },
     changeJob(value) {
       userJobs = []
-      value.forEach(function (data, index) {
-        const job = {id: data}
+      value.forEach(function(data, index) {
+        const job = { id: data }
         userJobs.push(job)
       })
     },
@@ -324,17 +335,17 @@ export default {
       // 恢复select
       const initRoles = []
       const initJobs = []
-      userRoles.forEach(function (role, index) {
+      userRoles.forEach(function(role, index) {
         initRoles.push(role.id)
       })
-      userJobs.forEach(function (job, index) {
+      userJobs.forEach(function(job, index) {
         initJobs.push(job.id)
       })
       crud.form.roles = initRoles
       crud.form.jobs = initJobs
     },
     deleteTag(value) {
-      userRoles.forEach(function (data, index) {
+      userRoles.forEach(function(data, index) {
         if (data.id === value) {
           userRoles.splice(index, value)
         }
@@ -359,16 +370,16 @@ export default {
       userJobs = []
       const roles = []
       const jobs = []
-      form.roles.forEach(function (role, index) {
+      form.roles.forEach(function(role, index) {
         roles.push(role.id)
         // 初始化编辑时候的角色
-        const rol = {id: role.id}
+        const rol = { id: role.id }
         userRoles.push(rol)
       })
-      form.jobs.forEach(function (job, index) {
+      form.jobs.forEach(function(job, index) {
         jobs.push(job.id)
         // 初始化编辑时候的岗位
-        const data = {id: job.id}
+        const data = { id: job.id }
         userJobs.push(data)
       })
       form.roles = roles
@@ -402,7 +413,7 @@ export default {
     // 获取左侧部门数据
     getDeptDatas(node, resolve) {
       const sort = 'id,desc'
-      const params = {sort: sort}
+      const params = { sort: sort }
       if (typeof node !== 'object') {
         if (node) {
           params['name'] = node
@@ -421,8 +432,8 @@ export default {
       }, 100)
     },
     getDepts() {
-      getDepts({enabled: true}).then(res => {
-        this.depts = res.content.map(function (obj) {
+      getDepts({ enabled: true }).then(res => {
+        this.depts = res.content.map(function(obj) {
           if (obj.hasChildren) {
             obj.children = null
           }
@@ -432,7 +443,7 @@ export default {
     },
     getSupDepts(deptId) {
       getDeptSuperior(deptId).then(res => {
-        this.depts = res.content.map(function (obj) {
+        this.depts = res.content.map(function(obj) {
           if (obj.hasChildren && !obj.children) {
             obj.children = null
           }
@@ -441,10 +452,10 @@ export default {
       })
     },
     // 获取弹窗内部门数据
-    loadDepts({action, parentNode, callback}) {
+    loadDepts({ action, parentNode, callback }) {
       if (action === LOAD_CHILDREN_OPTIONS) {
-        getDepts({enabled: true, pid: parentNode.id}).then(res => {
-          parentNode.children = res.content.map(function (obj) {
+        getDepts({ enabled: true, pid: parentNode.id }).then(res => {
+          parentNode.children = res.content.map(function(obj) {
             if (obj.hasChildren) {
               obj.children = null
             }

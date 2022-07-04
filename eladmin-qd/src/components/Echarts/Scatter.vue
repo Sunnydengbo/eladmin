@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -79,13 +79,13 @@ export default {
           name: '1990',
           data: data[0],
           type: 'scatter',
-          symbolSize: function (data) {
+          symbolSize: function(data) {
             return Math.sqrt(data[2]) / 5e2
           },
           label: {
             emphasis: {
               show: true,
-              formatter: function (param) {
+              formatter: function(param) {
                 return param.data[3]
               },
               position: 'top'
@@ -109,13 +109,13 @@ export default {
           name: '2015',
           data: data[1],
           type: 'scatter',
-          symbolSize: function (data) {
+          symbolSize: function(data) {
             return Math.sqrt(data[2]) / 5e2
           },
           label: {
             emphasis: {
               show: true,
-              formatter: function (param) {
+              formatter: function(param) {
                 return param.data[3]
               },
               position: 'top'

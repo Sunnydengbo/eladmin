@@ -38,4 +38,4 @@ export function execution(id) {
   })
 }
 
-export default {del, updateIsPause, execution, add, edit}
+export default { del, updateIsPause, execution, add, edit }

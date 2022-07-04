@@ -7,5 +7,5 @@ const lang = {
   projects: 'Projektek',
   contributions: 'Hozzájárulások',
   about: 'Rólam'
-};
-export default lang;
+}
+export default lang

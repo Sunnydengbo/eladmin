@@ -20,17 +20,17 @@
       <el-table v-loading="loading" :data="data" style="width: 100%" @row-click="showRow">
         <el-table-column width="30px">
           <template slot-scope="scope">
-            <el-radio v-model="radio" :label="scope.$index"/>
+            <el-radio v-model="radio" :label="scope.$index" />
           </template>
         </el-table-column>
-        <el-table-column label="应用名称" prop="appName"/>
-        <el-table-column label="部署IP" prop="ip"/>
+        <el-table-column label="应用名称" prop="appName" />
+        <el-table-column label="部署IP" prop="ip" />
         <el-table-column label="部署时间" prop="deployDate">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.deployDate) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="部署人员" prop="deployUser"/>
+        <el-table-column label="部署人员" prop="deployUser" />
       </el-table>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -52,7 +52,7 @@
 
 <script>
 import crud from '@/mixins/crud'
-import {reducte} from '@/api/mnt/deployHistory'
+import { reducte } from '@/api/mnt/deployHistory'
 
 export default {
   mixins: [crud],

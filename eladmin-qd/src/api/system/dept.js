@@ -41,4 +41,4 @@ export function edit(data) {
   })
 }
 
-export default {add, edit, del, getDepts, getDeptSuperior}
+export default { add, edit, del, getDepts, getDeptSuperior }

@@ -1,6 +1,6 @@
 <template>
   <div :class="{'show':show}" class="header-search">
-    <svg-icon class-name="search-icon" icon-class="search" @click.stop="click"/>
+    <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
     <el-select
       ref="headerSearchSelect"
       v-model="search"
@@ -12,7 +12,7 @@
       remote
       @change="change"
     >
-      <el-option v-for="item in options" :key="item.path" :label="item.title.join(' > ')" :value="item"/>
+      <el-option v-for="item in options" :key="item.path" :label="item.title.join(' > ')" :value="item" />
     </el-select>
   </div>
 </template>

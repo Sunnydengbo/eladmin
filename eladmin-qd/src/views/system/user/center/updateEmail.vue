@@ -1,20 +1,27 @@
 <template>
   <div style="display: inline-block;">
-    <el-dialog :before-close="cancel" :close-on-click-modal="false" :title="title" :visible.sync="dialog" append-to-body
-               width="475px" @close="cancel">
+    <el-dialog
+      :before-close="cancel"
+      :close-on-click-modal="false"
+      :title="title"
+      :visible.sync="dialog"
+      append-to-body
+      width="475px"
+      @close="cancel"
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="88px" size="small">
         <el-form-item label="新邮箱" prop="email">
-          <el-input v-model="form.email" auto-complete="on" style="width: 200px;"/>
+          <el-input v-model="form.email" auto-complete="on" style="width: 200px;" />
           <el-button :disabled="isDisabled" :loading="codeLoading" size="small" @click="sendCode">{{
-              buttonName
-            }}
+            buttonName
+          }}
           </el-button>
         </el-form-item>
         <el-form-item label="验证码" prop="code">
-          <el-input v-model="form.code" style="width: 320px;"/>
+          <el-input v-model="form.code" style="width: 320px;" />
         </el-form-item>
         <el-form-item label="当前密码" prop="pass">
-          <el-input v-model="form.pass" style="width: 320px;" type="password"/>
+          <el-input v-model="form.pass" style="width: 320px;" type="password" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -27,9 +34,9 @@
 
 <script>
 import store from '@/store'
-import {validEmail} from '@/utils/validate'
-import {updateEmail} from '@/api/system/user'
-import {resetEmail} from '@/api/system/code'
+import { validEmail } from '@/utils/validate'
+import { updateEmail } from '@/api/system/user'
+import { resetEmail } from '@/api/system/code'
 
 export default {
   props: {
@@ -51,18 +58,18 @@ export default {
       }
     }
     return {
-      loading: false, dialog: false, title: '修改邮箱', form: {pass: '', email: '', code: ''},
-      user: {email: '', password: ''}, codeLoading: false,
+      loading: false, dialog: false, title: '修改邮箱', form: { pass: '', email: '', code: '' },
+      user: { email: '', password: '' }, codeLoading: false,
       buttonName: '获取验证码', isDisabled: false, time: 60,
       rules: {
         pass: [
-          {required: true, message: '当前密码不能为空', trigger: 'blur'}
+          { required: true, message: '当前密码不能为空', trigger: 'blur' }
         ],
         email: [
-          {required: true, validator: validMail, trigger: 'blur'}
+          { required: true, validator: validMail, trigger: 'blur' }
         ],
         code: [
-          {required: true, message: '验证码不能为空', trigger: 'blur'}
+          { required: true, message: '验证码不能为空', trigger: 'blur' }
         ]
       }
     }
@@ -85,7 +92,7 @@ export default {
           this.codeLoading = false
           this.isDisabled = true
           this.buttonName = this.time-- + '秒后重新发送'
-          this.timer = window.setInterval(function () {
+          this.timer = window.setInterval(function() {
             _this.buttonName = _this.time + '秒后重新发送'
             --_this.time
             if (_this.time < 0) {
@@ -132,7 +139,7 @@ export default {
       this.time = 60
       this.buttonName = '获取验证码'
       this.isDisabled = false
-      this.form = {pass: '', email: '', code: ''}
+      this.form = { pass: '', email: '', code: '' }
     }
   }
 }

@@ -2,74 +2,74 @@
   <div class="dashboard-container">
     <div class="dashboard-editor-container">
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-        <heat-map/>
+        <heat-map />
       </el-row>
       <el-row :gutter="32">
         <el-col :lg="8" :sm="24" :xs="24">
           <div class="chart-wrapper">
-            <radar-chart/>
+            <radar-chart />
           </div>
         </el-col>
         <el-col :lg="8" :sm="24" :xs="24">
           <div class="chart-wrapper">
-            <sunburst/>
+            <sunburst />
           </div>
         </el-col>
         <el-col :lg="8" :sm="24" :xs="24">
           <div class="chart-wrapper">
-            <gauge/>
+            <gauge />
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="12">
         <el-col :span="12">
           <div class="chart-wrapper">
-            <rich/>
+            <rich />
           </div>
         </el-col>
         <el-col :span="12">
           <div class="chart-wrapper">
-            <theme-river/>
+            <theme-river />
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="32">
         <el-col :lg="8" :sm="24" :xs="24">
           <div class="chart-wrapper">
-            <graph/>
+            <graph />
           </div>
         </el-col>
         <el-col :lg="8" :sm="24" :xs="24">
           <div class="chart-wrapper">
-            <sankey/>
+            <sankey />
           </div>
         </el-col>
         <el-col :lg="8" :sm="24" :xs="24">
           <div class="chart-wrapper">
-            <line3-d/>
+            <line3-d />
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="12">
         <el-col :span="12">
           <div class="chart-wrapper">
-            <scatter/>
+            <scatter />
           </div>
         </el-col>
         <el-col :span="12">
           <div class="chart-wrapper">
-            <point/>
+            <point />
           </div>
         </el-col>
       </el-row>
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
         <div class="chart-wrapper">
-          <word-cloud/>
+          <word-cloud />
         </div>
       </el-row>
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
         <div class="chart-wrapper">
-          <category/>
+          <category />
         </div>
       </el-row>
     </div>

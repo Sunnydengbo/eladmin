@@ -1,8 +1,8 @@
 import yaml from 'js-yaml'
-import {PERSON} from '@/assets/resume/data.yml'
-import {terms} from './terms'
-import {mapGetters} from 'vuex'
-import {getToken} from '@/utils/auth'
+import { PERSON } from '@/assets/resume/data.yml'
+import { terms } from './terms'
+import { mapGetters } from 'vuex'
+import { getToken } from '@/utils/auth'
 import Avatar from '@/assets/images/avatar.png'
 
 // Called by templates to decrease redundancy

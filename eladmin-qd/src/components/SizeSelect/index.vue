@@ -1,11 +1,15 @@
 <template>
   <el-dropdown trigger="click" @command="handleSetSize">
     <div>
-      <svg-icon class-name="size-icon" icon-class="size"/>
+      <svg-icon class-name="size-icon" icon-class="size" />
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item v-for="item of sizeOptions" :key="item.value" :command="item.value"
-                        :disabled="size===item.value">
+      <el-dropdown-item
+        v-for="item of sizeOptions"
+        :key="item.value"
+        :command="item.value"
+        :disabled="size===item.value"
+      >
         {{
           item.label
         }}
@@ -19,10 +23,10 @@ export default {
   data() {
     return {
       sizeOptions: [
-        {label: 'Default', value: 'default'},
-        {label: 'Medium', value: 'medium'},
-        {label: 'Small', value: 'small'},
-        {label: 'Mini', value: 'mini'}
+        { label: 'Default', value: 'default' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Small', value: 'small' },
+        { label: 'Mini', value: 'mini' }
       ]
     }
   },
@@ -45,7 +49,7 @@ export default {
       // In order to make the cached page re-rendered
       this.$store.dispatch('tagsView/delAllCachedViews', this.$route)
 
-      const {fullPath} = this.$route
+      const { fullPath } = this.$route
 
       this.$nextTick(() => {
         this.$router.replace({

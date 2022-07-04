@@ -1,13 +1,19 @@
 <!-- @author zhengjie -->
 <template>
   <div class="icon-body">
-    <el-input v-model="name" clearable placeholder="请输入图标名称" style="position: relative;" @clear="filterIcons"
-              @input.native="filterIcons">
-      <i slot="suffix" class="el-icon-search el-input__icon"/>
+    <el-input
+      v-model="name"
+      clearable
+      placeholder="请输入图标名称"
+      style="position: relative;"
+      @clear="filterIcons"
+      @input.native="filterIcons"
+    >
+      <i slot="suffix" class="el-icon-search el-input__icon" />
     </el-input>
     <div class="icon-list">
       <div v-for="(item, index) in iconList" :key="index" @click="selectedIcon(item)">
-        <svg-icon :icon-class="item" style="height: 30px;width: 16px;"/>
+        <svg-icon :icon-class="item" style="height: 30px;width: 16px;" />
         <span>{{ item }}</span>
       </div>
     </div>

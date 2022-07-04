@@ -1,16 +1,23 @@
 <template>
   <div style="display: inline-block">
-    <el-dialog :before-close="cancel" :close-on-click-modal="false" :title="title" :visible.sync="dialog" append-to-body
-               width="500px" @close="cancel">
+    <el-dialog
+      :before-close="cancel"
+      :close-on-click-modal="false"
+      :title="title"
+      :visible.sync="dialog"
+      append-to-body
+      width="500px"
+      @close="cancel"
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="88px" size="small">
         <el-form-item label="旧密码" prop="oldPass">
-          <el-input v-model="form.oldPass" auto-complete="on" style="width: 370px;" type="password"/>
+          <el-input v-model="form.oldPass" auto-complete="on" style="width: 370px;" type="password" />
         </el-form-item>
         <el-form-item label="新密码" prop="newPass">
-          <el-input v-model="form.newPass" auto-complete="on" style="width: 370px;" type="password"/>
+          <el-input v-model="form.newPass" auto-complete="on" style="width: 370px;" type="password" />
         </el-form-item>
         <el-form-item label="确认密码" prop="confirmPass">
-          <el-input v-model="form.confirmPass" auto-complete="on" style="width: 370px;" type="password"/>
+          <el-input v-model="form.confirmPass" auto-complete="on" style="width: 370px;" type="password" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -23,7 +30,7 @@
 
 <script>
 import store from '@/store'
-import {updatePass} from '@/api/system/user'
+import { updatePass } from '@/api/system/user'
 
 export default {
   data() {
@@ -39,17 +46,17 @@ export default {
       }
     }
     return {
-      loading: false, dialog: false, title: '修改密码', form: {oldPass: '', newPass: '', confirmPass: ''},
+      loading: false, dialog: false, title: '修改密码', form: { oldPass: '', newPass: '', confirmPass: '' },
       rules: {
         oldPass: [
-          {required: true, message: '请输入旧密码', trigger: 'blur'}
+          { required: true, message: '请输入旧密码', trigger: 'blur' }
         ],
         newPass: [
-          {required: true, message: '请输入新密码', trigger: 'blur'},
-          {min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur'}
+          { required: true, message: '请输入新密码', trigger: 'blur' },
+          { min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur' }
         ],
         confirmPass: [
-          {required: true, validator: confirmPass, trigger: 'blur'}
+          { required: true, validator: confirmPass, trigger: 'blur' }
         ]
       }
     }
@@ -86,7 +93,7 @@ export default {
     resetForm() {
       this.dialog = false
       this.$refs['form'].resetFields()
-      this.form = {oldPass: '', newPass: '', confirmPass: ''}
+      this.form = { oldPass: '', newPass: '', confirmPass: '' }
     }
   }
 }

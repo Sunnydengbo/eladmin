@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -60,7 +60,7 @@ export default {
         },
         toolbox: {
           feature: {
-            dataView: {readOnly: false},
+            dataView: { readOnly: false },
             restore: {},
             saveAsImage: {}
           }
@@ -105,11 +105,11 @@ export default {
               }
             },
             data: [
-              {value: 60, name: '访问'},
-              {value: 40, name: '咨询'},
-              {value: 20, name: '订单'},
-              {value: 80, name: '点击'},
-              {value: 100, name: '展现'}
+              { value: 60, name: '访问' },
+              { value: 40, name: '咨询' },
+              { value: 20, name: '订单' },
+              { value: 80, name: '点击' },
+              { value: 100, name: '展现' }
             ]
           }
         ]

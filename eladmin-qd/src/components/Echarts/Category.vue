@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -169,7 +169,7 @@ export default {
               {
                 value: '2011-01-01',
                 tooltip: {
-                  formatter: function (params) {
+                  formatter: function(params) {
                     return params.name + 'GDP达到又一个高度'
                   }
                 },
@@ -178,7 +178,7 @@ export default {
               }
             ],
             label: {
-              formatter: function (s) {
+              formatter: function(s) {
                 return (new Date(s)).getFullYear()
               }
             }
@@ -204,7 +204,7 @@ export default {
                 type: 'shadow',
                 label: {
                   show: true,
-                  formatter: function (params) {
+                  formatter: function(params) {
                     return params.value.replace('\n', '')
                   }
                 }
@@ -224,7 +224,7 @@ export default {
                 '湖北', '\n湖南', '广东', '\n广西', '海南', '\n重庆', '四川', '\n贵州',
                 '云南', '\n西藏', '陕西', '\n甘肃', '青海', '\n宁夏', '新疆'
               ],
-              splitLine: {show: false}
+              splitLine: { show: false }
             }
           ],
           yAxis: [
@@ -234,12 +234,12 @@ export default {
             }
           ],
           series: [
-            {name: 'GDP', type: 'bar'},
-            {name: '金融', type: 'bar'},
-            {name: '房地产', type: 'bar'},
-            {name: '第一产业', type: 'bar'},
-            {name: '第二产业', type: 'bar'},
-            {name: '第三产业', type: 'bar'},
+            { name: 'GDP', type: 'bar' },
+            { name: '金融', type: 'bar' },
+            { name: '房地产', type: 'bar' },
+            { name: '第一产业', type: 'bar' },
+            { name: '第二产业', type: 'bar' },
+            { name: '第三产业', type: 'bar' },
             {
               name: 'GDP占比',
               type: 'pie',
@@ -251,181 +251,181 @@ export default {
         },
         options: [
           {
-            title: {text: '2002全国宏观经济指标'},
+            title: { text: '2002全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2002']},
-              {data: dataMap.dataFinancial['2002']},
-              {data: dataMap.dataEstate['2002']},
-              {data: dataMap.dataPI['2002']},
-              {data: dataMap.dataSI['2002']},
-              {data: dataMap.dataTI['2002']},
+              { data: dataMap.dataGDP['2002'] },
+              { data: dataMap.dataFinancial['2002'] },
+              { data: dataMap.dataEstate['2002'] },
+              { data: dataMap.dataPI['2002'] },
+              { data: dataMap.dataSI['2002'] },
+              { data: dataMap.dataTI['2002'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2002sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2002sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2002sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2002sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2002sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2002sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2003全国宏观经济指标'},
+            title: { text: '2003全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2003']},
-              {data: dataMap.dataFinancial['2003']},
-              {data: dataMap.dataEstate['2003']},
-              {data: dataMap.dataPI['2003']},
-              {data: dataMap.dataSI['2003']},
-              {data: dataMap.dataTI['2003']},
+              { data: dataMap.dataGDP['2003'] },
+              { data: dataMap.dataFinancial['2003'] },
+              { data: dataMap.dataEstate['2003'] },
+              { data: dataMap.dataPI['2003'] },
+              { data: dataMap.dataSI['2003'] },
+              { data: dataMap.dataTI['2003'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2003sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2003sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2003sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2003sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2003sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2003sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2004全国宏观经济指标'},
+            title: { text: '2004全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2004']},
-              {data: dataMap.dataFinancial['2004']},
-              {data: dataMap.dataEstate['2004']},
-              {data: dataMap.dataPI['2004']},
-              {data: dataMap.dataSI['2004']},
-              {data: dataMap.dataTI['2004']},
+              { data: dataMap.dataGDP['2004'] },
+              { data: dataMap.dataFinancial['2004'] },
+              { data: dataMap.dataEstate['2004'] },
+              { data: dataMap.dataPI['2004'] },
+              { data: dataMap.dataSI['2004'] },
+              { data: dataMap.dataTI['2004'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2004sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2004sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2004sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2004sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2004sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2004sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2005全国宏观经济指标'},
+            title: { text: '2005全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2005']},
-              {data: dataMap.dataFinancial['2005']},
-              {data: dataMap.dataEstate['2005']},
-              {data: dataMap.dataPI['2005']},
-              {data: dataMap.dataSI['2005']},
-              {data: dataMap.dataTI['2005']},
+              { data: dataMap.dataGDP['2005'] },
+              { data: dataMap.dataFinancial['2005'] },
+              { data: dataMap.dataEstate['2005'] },
+              { data: dataMap.dataPI['2005'] },
+              { data: dataMap.dataSI['2005'] },
+              { data: dataMap.dataTI['2005'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2005sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2005sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2005sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2005sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2005sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2005sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2006全国宏观经济指标'},
+            title: { text: '2006全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2006']},
-              {data: dataMap.dataFinancial['2006']},
-              {data: dataMap.dataEstate['2006']},
-              {data: dataMap.dataPI['2006']},
-              {data: dataMap.dataSI['2006']},
-              {data: dataMap.dataTI['2006']},
+              { data: dataMap.dataGDP['2006'] },
+              { data: dataMap.dataFinancial['2006'] },
+              { data: dataMap.dataEstate['2006'] },
+              { data: dataMap.dataPI['2006'] },
+              { data: dataMap.dataSI['2006'] },
+              { data: dataMap.dataTI['2006'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2006sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2006sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2006sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2006sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2006sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2006sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2007全国宏观经济指标'},
+            title: { text: '2007全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2007']},
-              {data: dataMap.dataFinancial['2007']},
-              {data: dataMap.dataEstate['2007']},
-              {data: dataMap.dataPI['2007']},
-              {data: dataMap.dataSI['2007']},
-              {data: dataMap.dataTI['2007']},
+              { data: dataMap.dataGDP['2007'] },
+              { data: dataMap.dataFinancial['2007'] },
+              { data: dataMap.dataEstate['2007'] },
+              { data: dataMap.dataPI['2007'] },
+              { data: dataMap.dataSI['2007'] },
+              { data: dataMap.dataTI['2007'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2007sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2007sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2007sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2007sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2007sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2007sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2008全国宏观经济指标'},
+            title: { text: '2008全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2008']},
-              {data: dataMap.dataFinancial['2008']},
-              {data: dataMap.dataEstate['2008']},
-              {data: dataMap.dataPI['2008']},
-              {data: dataMap.dataSI['2008']},
-              {data: dataMap.dataTI['2008']},
+              { data: dataMap.dataGDP['2008'] },
+              { data: dataMap.dataFinancial['2008'] },
+              { data: dataMap.dataEstate['2008'] },
+              { data: dataMap.dataPI['2008'] },
+              { data: dataMap.dataSI['2008'] },
+              { data: dataMap.dataTI['2008'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2008sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2008sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2008sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2008sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2008sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2008sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2009全国宏观经济指标'},
+            title: { text: '2009全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2009']},
-              {data: dataMap.dataFinancial['2009']},
-              {data: dataMap.dataEstate['2009']},
-              {data: dataMap.dataPI['2009']},
-              {data: dataMap.dataSI['2009']},
-              {data: dataMap.dataTI['2009']},
+              { data: dataMap.dataGDP['2009'] },
+              { data: dataMap.dataFinancial['2009'] },
+              { data: dataMap.dataEstate['2009'] },
+              { data: dataMap.dataPI['2009'] },
+              { data: dataMap.dataSI['2009'] },
+              { data: dataMap.dataTI['2009'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2009sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2009sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2009sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2009sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2009sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2009sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2010全国宏观经济指标'},
+            title: { text: '2010全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2010']},
-              {data: dataMap.dataFinancial['2010']},
-              {data: dataMap.dataEstate['2010']},
-              {data: dataMap.dataPI['2010']},
-              {data: dataMap.dataSI['2010']},
-              {data: dataMap.dataTI['2010']},
+              { data: dataMap.dataGDP['2010'] },
+              { data: dataMap.dataFinancial['2010'] },
+              { data: dataMap.dataEstate['2010'] },
+              { data: dataMap.dataPI['2010'] },
+              { data: dataMap.dataSI['2010'] },
+              { data: dataMap.dataTI['2010'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2010sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2010sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2010sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2010sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2010sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2010sum'] }
                 ]
               }
             ]
           },
           {
-            title: {text: '2011全国宏观经济指标'},
+            title: { text: '2011全国宏观经济指标' },
             series: [
-              {data: dataMap.dataGDP['2011']},
-              {data: dataMap.dataFinancial['2011']},
-              {data: dataMap.dataEstate['2011']},
-              {data: dataMap.dataPI['2011']},
-              {data: dataMap.dataSI['2011']},
-              {data: dataMap.dataTI['2011']},
+              { data: dataMap.dataGDP['2011'] },
+              { data: dataMap.dataFinancial['2011'] },
+              { data: dataMap.dataEstate['2011'] },
+              { data: dataMap.dataPI['2011'] },
+              { data: dataMap.dataSI['2011'] },
+              { data: dataMap.dataTI['2011'] },
               {
                 data: [
-                  {name: '第一产业', value: dataMap.dataPI['2011sum']},
-                  {name: '第二产业', value: dataMap.dataSI['2011sum']},
-                  {name: '第三产业', value: dataMap.dataTI['2011sum']}
+                  { name: '第一产业', value: dataMap.dataPI['2011sum'] },
+                  { name: '第二产业', value: dataMap.dataSI['2011sum'] },
+                  { name: '第三产业', value: dataMap.dataTI['2011sum'] }
                 ]
               }
             ]

@@ -1,4 +1,4 @@
-import {constantRouterMap} from '@/router/routers'
+import { constantRouterMap } from '@/router/routers'
 import Layout from '@/layout/index'
 
 const permission = {
@@ -13,7 +13,7 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes({commit}, asyncRouter) {
+    GenerateRoutes({ commit }, asyncRouter) {
       commit('SET_ROUTERS', asyncRouter)
     }
   }

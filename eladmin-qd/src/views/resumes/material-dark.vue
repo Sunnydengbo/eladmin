@@ -1,8 +1,8 @@
 <template>
   <div id="resume" class="resume">
     <div class="leftCol m_box">
-      <div class="shadow"/>
-      <div id="myselfpic" class="heading"/>
+      <div class="shadow" />
+      <div id="myselfpic" class="heading" />
       <div class="section-headline">
         {{ lang.contact }}
       </div>
@@ -54,7 +54,7 @@
       <a v-if="person.contact.github" :href="contactLinks.github" target="_blank">
         <div class="item">
           <div class="icon">
-            <i class="fa fa-github"/>
+            <i class="fa fa-github" />
           </div>
           <div class="text">
             <span>@{{ person.contact.github }}</span>
@@ -83,7 +83,7 @@
             <span>{{ skill.name }}&nbsp;</span>
             <div class="progress">
               <div :style="'width: '+skill.level+'%;'" class="determinate">
-                <i class="fa fa-circle"/>
+                <i class="fa fa-circle" />
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@
       <div class="section-headline experience">{{ lang.experience }}</div>
       <div v-for="experience in person.experience" :key="experience.company" class="block">
         <a :href="experience.website">
-          <div class="block-helper"/>
+          <div class="block-helper" />
           <h3 class="headline">{{ experience.position }} - {{ experience.company }}</h3>
           <div class="subheadline">{{ experience.timeperiod }}</div>
           <p class="info">{{ experience.description }}</p>
@@ -121,7 +121,7 @@
       <div class="section-headline">{{ lang.education }}</div>
       <div v-for="education in person.education" :key="education.degree" class="block">
         <a :href="education.website">
-          <div class="block-helper"/>
+          <div class="block-helper" />
           <div class="headline">{{ education.degree }}</div>
           <p class="info">
             {{ education.timeperiod }}, {{ education.description }}
@@ -130,13 +130,13 @@
       </div>
     </div>
 
-    <div style="clear:both;"/>
+    <div style="clear:both;" />
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import {getVueOptions} from './options'
+import { getVueOptions } from './options'
 
 const name = 'material-dark'
 

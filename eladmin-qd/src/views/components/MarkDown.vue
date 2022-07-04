@@ -6,13 +6,13 @@
       ，图片上传使用
       <el-link href="https://sm.ms/" target="_blank" type="primary">SM.MS</el-link>
     </p>
-    <mavon-editor ref="md" :style="'height:' + height" @imgAdd="imgAdd"/>
+    <mavon-editor ref="md" :style="'height:' + height" @imgAdd="imgAdd" />
   </div>
 </template>
 
 <script>
-import {upload} from '@/utils/upload'
-import {mapGetters} from 'vuex'
+import { upload } from '@/utils/upload'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Markdown',

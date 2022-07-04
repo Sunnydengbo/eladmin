@@ -4,8 +4,15 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.blurry" class="filter-item" clearable placeholder="输入名称或者描述搜索" size="small"
-                  style="width: 200px;" @keyup.enter.native="crud.toQuery"/>
+        <el-input
+          v-model="query.blurry"
+          class="filter-item"
+          clearable
+          placeholder="输入名称或者描述搜索"
+          size="small"
+          style="width: 200px;"
+          @keyup.enter.native="crud.toQuery"
+        />
         <el-date-picker
           v-model="query.createTime"
           :default-time="['00:00:00','23:59:59']"
@@ -17,19 +24,25 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <rrOperation/>
+        <rrOperation />
       </div>
-      <crudOperation :permission="permission"/>
+      <crudOperation :permission="permission" />
     </div>
     <!-- 表单渲染 -->
-    <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.title"
-               :visible.sync="crud.status.cu > 0" append-to-body width="520px">
+    <el-dialog
+      :before-close="crud.cancelCU"
+      :close-on-click-modal="false"
+      :title="crud.status.title"
+      :visible.sync="crud.status.cu > 0"
+      append-to-body
+      width="520px"
+    >
       <el-form ref="form" :inline="true" :model="form" :rules="rules" label-width="80px" size="small">
         <el-form-item label="角色名称" prop="name">
-          <el-input v-model="form.name" style="width: 380px;"/>
+          <el-input v-model="form.name" style="width: 380px;" />
         </el-form-item>
         <el-form-item label="角色级别" prop="level">
-          <el-input-number v-model.number="form.level" :min="1" controls-position="right" style="width: 145px;"/>
+          <el-input-number v-model.number="form.level" :min="1" controls-position="right" style="width: 145px;" />
         </el-form-item>
         <el-form-item label="数据范围" prop="dataScope">
           <el-select v-model="form.dataScope" placeholder="请选择数据范围" style="width: 140px" @change="changeScope">
@@ -52,7 +65,7 @@
           />
         </el-form-item>
         <el-form-item label="描述信息" prop="description">
-          <el-input v-model="form.description" rows="5" style="width: 380px;" type="textarea"/>
+          <el-input v-model="form.description" rows="5" style="width: 380px;" type="textarea" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -67,20 +80,32 @@
           <div slot="header" class="clearfix">
             <span class="role-span">角色列表</span>
           </div>
-          <el-table ref="table" v-loading="crud.loading" :data="crud.data" highlight-current-row style="width: 100%;"
-                    @selection-change="crud.selectionChangeHandler" @current-change="handleCurrentChange">
-            <el-table-column :selectable="checkboxT" type="selection" width="55"/>
-            <el-table-column label="名称" prop="name"/>
-            <el-table-column label="数据权限" prop="dataScope"/>
-            <el-table-column label="角色级别" prop="level"/>
-            <el-table-column :show-overflow-tooltip="true" label="描述" prop="description"/>
+          <el-table
+            ref="table"
+            v-loading="crud.loading"
+            :data="crud.data"
+            highlight-current-row
+            style="width: 100%;"
+            @selection-change="crud.selectionChangeHandler"
+            @current-change="handleCurrentChange"
+          >
+            <el-table-column :selectable="checkboxT" type="selection" width="55" />
+            <el-table-column label="名称" prop="name" />
+            <el-table-column label="数据权限" prop="dataScope" />
+            <el-table-column label="角色级别" prop="level" />
+            <el-table-column :show-overflow-tooltip="true" label="描述" prop="description" />
             <el-table-column :show-overflow-tooltip="true" label="创建日期" prop="createTime" width="135px">
               <template slot-scope="scope">
                 <span>{{ parseTime(scope.row.createTime) }}</span>
               </template>
             </el-table-column>
-            <el-table-column v-permission="['admin','roles:edit','roles:del']" align="center" fixed="right" label="操作"
-                             width="130px">
+            <el-table-column
+              v-permission="['admin','roles:edit','roles:del']"
+              align="center"
+              fixed="right"
+              label="操作"
+              width="130px"
+            >
               <template slot-scope="scope">
                 <udOperation
                   v-if="scope.row.level >= level"
@@ -91,7 +116,7 @@
             </el-table-column>
           </el-table>
           <!--分页组件-->
-          <pagination/>
+          <pagination />
         </el-card>
       </el-col>
       <!-- 菜单授权 -->
@@ -133,27 +158,27 @@
 
 <script>
 import crudRoles from '@/api/system/role'
-import {getDepts, getDeptSuperior} from '@/api/system/dept'
-import {getMenusTree, getMenuSuperior} from '@/api/system/menu'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import { getDepts, getDeptSuperior } from '@/api/system/dept'
+import { getMenusTree, getMenuSuperior } from '@/api/system/menu'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
-import Treeselect, {LOAD_CHILDREN_OPTIONS} from '@riophae/vue-treeselect'
+import Treeselect, { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
-const defaultForm = {id: null, name: null, depts: [], description: null, dataScope: '全部', level: 3}
+const defaultForm = { id: null, name: null, depts: [], description: null, dataScope: '全部', level: 3 }
 export default {
   name: 'Role',
-  components: {Treeselect, pagination, crudOperation, rrOperation, udOperation},
+  components: { Treeselect, pagination, crudOperation, rrOperation, udOperation },
   cruds() {
-    return CRUD({title: '角色', url: 'api/roles', sort: 'level,asc', crudMethod: {...crudRoles}})
+    return CRUD({ title: '角色', url: 'api/roles', sort: 'level,asc', crudMethod: { ...crudRoles }})
   },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   data() {
     return {
-      defaultProps: {children: 'children', label: 'label', isLeaf: 'leaf'},
+      defaultProps: { children: 'children', label: 'label', isLeaf: 'leaf' },
       dateScopes: ['全部', '本级', '自定义'], level: 3,
       currentId: 0, menuLoading: false, showButton: false,
       menus: [], menuIds: [], depts: [],
@@ -164,10 +189,10 @@ export default {
       },
       rules: {
         name: [
-          {required: true, message: '请输入名称', trigger: 'blur'}
+          { required: true, message: '请输入名称', trigger: 'blur' }
         ],
         permission: [
-          {required: true, message: '请输入权限', trigger: 'blur'}
+          { required: true, message: '请输入权限', trigger: 'blur' }
         ]
       }
     }
@@ -198,7 +223,7 @@ export default {
         }
       }
       const depts = []
-      form.depts.forEach(function (dept, index) {
+      form.depts.forEach(function(dept, index) {
         depts.push(dept.id)
       })
       form.depts = depts
@@ -213,8 +238,8 @@ export default {
         return false
       } else if (crud.form.dataScope === '自定义') {
         const depts = []
-        crud.form.depts.forEach(function (data, index) {
-          const dept = {id: data}
+        crud.form.depts.forEach(function(data, index) {
+          const dept = { id: data }
           depts.push(dept)
         })
         crud.form.depts = depts
@@ -231,7 +256,7 @@ export default {
     },
     afterErrorMethod(crud) {
       const depts = []
-      crud.form.depts.forEach(function (dept, index) {
+      crud.form.depts.forEach(function(dept, index) {
         depts.push(dept.id)
       })
       crud.form.depts = depts
@@ -248,7 +273,7 @@ export default {
         // 初始化
         this.menuIds = []
         // 菜单数据需要特殊处理
-        val.menus.forEach(function (data, index) {
+        val.menus.forEach(function(data, index) {
           _this.menuIds.push(data.id)
         })
         getMenuSuperior(this.menuIds).then(res => {
@@ -259,15 +284,15 @@ export default {
     // 保存菜单
     saveMenu() {
       this.menuLoading = true
-      const role = {id: this.currentId, menus: []}
+      const role = { id: this.currentId, menus: [] }
       // 得到半选的父节点数据，保存起来
-      this.$refs.menu.getHalfCheckedNodes().forEach(function (data, index) {
-        const menu = {id: data.id}
+      this.$refs.menu.getHalfCheckedNodes().forEach(function(data, index) {
+        const menu = { id: data.id }
         role.menus.push(menu)
       })
       // 得到已选中的 key 值
-      this.$refs.menu.getCheckedKeys().forEach(function (data, index) {
-        const menu = {id: data}
+      this.$refs.menu.getCheckedKeys().forEach(function(data, index) {
+        const menu = { id: data }
         role.menus.push(menu)
       })
       crudRoles.editMenu(role).then(res => {
@@ -293,8 +318,8 @@ export default {
     },
     // 获取部门数据
     getDepts() {
-      getDepts({enabled: true}).then(res => {
-        this.depts = res.content.map(function (obj) {
+      getDepts({ enabled: true }).then(res => {
+        this.depts = res.content.map(function(obj) {
           if (obj.hasChildren) {
             obj.children = null
           }
@@ -308,7 +333,7 @@ export default {
         ids.push(dept.id)
       })
       getDeptSuperior(ids).then(res => {
-        this.depts = res.content.map(function (obj) {
+        this.depts = res.content.map(function(obj) {
           if (obj.hasChildren && !obj.children) {
             obj.children = null
           }
@@ -317,10 +342,10 @@ export default {
       })
     },
     // 获取弹窗内部门数据
-    loadDepts({action, parentNode, callback}) {
+    loadDepts({ action, parentNode, callback }) {
       if (action === LOAD_CHILDREN_OPTIONS) {
-        getDepts({enabled: true, pid: parentNode.id}).then(res => {
-          parentNode.children = res.content.map(function (obj) {
+        getDepts({ enabled: true, pid: parentNode.id }).then(res => {
+          parentNode.children = res.content.map(function(obj) {
             if (obj.hasChildren) {
               obj.children = null
             }

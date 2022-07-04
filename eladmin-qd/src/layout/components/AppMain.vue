@@ -2,11 +2,11 @@
   <section class="app-main">
     <transition mode="out-in" name="fade-transform">
       <keep-alive :include="cachedViews">
-        <router-view :key="key"/>
+        <router-view :key="key" />
       </keep-alive>
     </transition>
     <div v-if="$store.state.settings.showFooter" id="el-main-footer">
-      <span v-html="$store.state.settings.footerTxt"/>
+      <span v-html="$store.state.settings.footerTxt" />
       <span> ⋅ </span>
       <a href="https://gitee.com/adyfang/eladmin" target="_blank">{{ $store.state.settings.caseNumber }}</a>
     </div>

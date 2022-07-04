@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import {encrypt} from '@/utils/rsaEncrypt'
+import { encrypt } from '@/utils/rsaEncrypt'
 
 export function add(data) {
   return request({
@@ -57,5 +57,5 @@ export function updateEmail(form) {
   })
 }
 
-export default {add, edit, del}
+export default { add, edit, del }
 

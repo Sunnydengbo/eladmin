@@ -37,4 +37,4 @@ export function del(ids) {
   })
 }
 
-export default {del, download, sync}
+export default { del, download, sync }

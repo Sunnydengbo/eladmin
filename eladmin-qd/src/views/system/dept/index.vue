@@ -4,8 +4,15 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.name" class="filter-item" clearable placeholder="输入部门名称搜索" size="small"
-                  style="width: 200px;" @keyup.enter.native="crud.toQuery"/>
+        <el-input
+          v-model="query.name"
+          class="filter-item"
+          clearable
+          placeholder="输入部门名称搜索"
+          size="small"
+          style="width: 200px;"
+          @keyup.enter.native="crud.toQuery"
+        />
         <el-date-picker
           v-model="query.createTime"
           :default-time="['00:00:00','23:59:59']"
@@ -17,20 +24,33 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <el-select v-model="query.enabled" class="filter-item" clearable placeholder="状态" size="small"
-                   style="width: 90px" @change="crud.toQuery">
-          <el-option v-for="item in enabledTypeOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
+        <el-select
+          v-model="query.enabled"
+          class="filter-item"
+          clearable
+          placeholder="状态"
+          size="small"
+          style="width: 90px"
+          @change="crud.toQuery"
+        >
+          <el-option v-for="item in enabledTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
         </el-select>
-        <rrOperation/>
+        <rrOperation />
       </div>
-      <crudOperation :permission="permission"/>
+      <crudOperation :permission="permission" />
     </div>
     <!--表单组件-->
-    <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.title"
-               :visible.sync="crud.status.cu > 0" append-to-body width="500px">
+    <el-dialog
+      :before-close="crud.cancelCU"
+      :close-on-click-modal="false"
+      :title="crud.status.title"
+      :visible.sync="crud.status.cu > 0"
+      append-to-body
+      width="500px"
+    >
       <el-form ref="form" :model="form" :rules="rules" inline label-width="80px" size="small">
         <el-form-item label="部门名称" prop="name">
-          <el-input v-model="form.name" style="width: 370px;"/>
+          <el-input v-model="form.name" style="width: 370px;" />
         </el-form-item>
         <el-form-item label="部门排序" prop="deptSort">
           <el-input-number
@@ -80,9 +100,9 @@
       @select-all="crud.selectAllChange"
       @selection-change="crud.selectionChangeHandler"
     >
-      <el-table-column :selectable="checkboxT" type="selection" width="55"/>
-      <el-table-column label="名称" prop="name"/>
-      <el-table-column label="排序" prop="deptSort"/>
+      <el-table-column :selectable="checkboxT" type="selection" width="55" />
+      <el-table-column label="名称" prop="name" />
+      <el-table-column label="排序" prop="deptSort" />
       <el-table-column align="center" label="状态" prop="enabled">
         <template slot-scope="scope">
           <el-switch
@@ -99,8 +119,13 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-permission="['admin','dept:edit','dept:del']" align="center" fixed="right" label="操作"
-                       width="130px">
+      <el-table-column
+        v-permission="['admin','dept:edit','dept:del']"
+        align="center"
+        fixed="right"
+        label="操作"
+        width="130px"
+      >
         <template slot-scope="scope">
           <udOperation
             :data="scope.row"
@@ -116,19 +141,19 @@
 
 <script>
 import crudDept from '@/api/system/dept'
-import Treeselect, {LOAD_CHILDREN_OPTIONS} from '@riophae/vue-treeselect'
+import Treeselect, { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 
-const defaultForm = {id: null, name: null, isTop: '1', subCount: 0, pid: null, deptSort: 999, enabled: 'true'}
+const defaultForm = { id: null, name: null, isTop: '1', subCount: 0, pid: null, deptSort: 999, enabled: 'true' }
 export default {
   name: 'Dept',
-  components: {Treeselect, crudOperation, rrOperation, udOperation},
+  components: { Treeselect, crudOperation, rrOperation, udOperation },
   cruds() {
-    return CRUD({title: '部门', url: 'api/dept', crudMethod: {...crudDept}})
+    return CRUD({ title: '部门', url: 'api/dept', crudMethod: { ...crudDept }})
   },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   // 设置数据字典
@@ -138,10 +163,10 @@ export default {
       depts: [],
       rules: {
         name: [
-          {required: true, message: '请输入名称', trigger: 'blur'}
+          { required: true, message: '请输入名称', trigger: 'blur' }
         ],
         deptSort: [
-          {required: true, message: '请输入序号', trigger: 'blur', type: 'number'}
+          { required: true, message: '请输入序号', trigger: 'blur', type: 'number' }
         ]
       },
       permission: {
@@ -150,14 +175,14 @@ export default {
         del: ['admin', 'dept:del']
       },
       enabledTypeOptions: [
-        {key: 'true', display_name: '正常'},
-        {key: 'false', display_name: '禁用'}
+        { key: 'true', display_name: '正常' },
+        { key: 'false', display_name: '禁用' }
       ]
     }
   },
   methods: {
     getDeptDatas(tree, treeNode, resolve) {
-      const params = {pid: tree.id}
+      const params = { pid: tree.id }
       setTimeout(() => {
         crudDept.getDepts(params).then(res => {
           resolve(res.content)
@@ -180,7 +205,7 @@ export default {
     },
     getSupDepts(id) {
       crudDept.getDeptSuperior(id).then(res => {
-        this.depts = res.content.map(function (obj) {
+        this.depts = res.content.map(function(obj) {
           if (obj.hasChildren && !obj.children) {
             obj.children = null
           }
@@ -189,8 +214,8 @@ export default {
       })
     },
     getDepts() {
-      crudDept.getDepts({enabled: true}).then(res => {
-        this.depts = res.content.map(function (obj) {
+      crudDept.getDepts({ enabled: true }).then(res => {
+        this.depts = res.content.map(function(obj) {
           if (obj.hasChildren) {
             obj.children = null
           }
@@ -199,10 +224,10 @@ export default {
       })
     },
     // 获取弹窗内部门数据
-    loadDepts({action, parentNode, callback}) {
+    loadDepts({ action, parentNode, callback }) {
       if (action === LOAD_CHILDREN_OPTIONS) {
-        crudDept.getDepts({enabled: true, pid: parentNode.id}).then(res => {
-          parentNode.children = res.content.map(function (obj) {
+        crudDept.getDepts({ enabled: true, pid: parentNode.id }).then(res => {
+          parentNode.children = res.content.map(function(obj) {
             if (obj.hasChildren) {
               obj.children = null
             }

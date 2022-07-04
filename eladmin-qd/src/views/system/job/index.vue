@@ -2,14 +2,19 @@
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
-      <eHeader :dict="dict" :permission="permission"/>
-      <crudOperation :permission="permission"/>
+      <eHeader :dict="dict" :permission="permission" />
+      <crudOperation :permission="permission" />
     </div>
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-              @selection-change="crud.selectionChangeHandler">
-      <el-table-column type="selection" width="55"/>
-      <el-table-column label="名称" prop="name"/>
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      style="width: 100%;"
+      @selection-change="crud.selectionChangeHandler"
+    >
+      <el-table-column type="selection" width="55" />
+      <el-table-column label="名称" prop="name" />
       <el-table-column label="排序" prop="jobSort">
         <template slot-scope="scope">
           {{ scope.row.jobSort }}
@@ -47,9 +52,9 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
     <!--表单渲染-->
-    <eForm :job-status="dict.job_status"/>
+    <eForm :job-status="dict.job_status" />
   </div>
 </template>
 
@@ -57,20 +62,20 @@
 import crudJob from '@/api/system/job'
 import eHeader from './module/header'
 import eForm from './module/form'
-import CRUD, {presenter} from '@crud/crud'
+import CRUD, { presenter } from '@crud/crud'
 import crudOperation from '@crud/CRUD.operation'
 import pagination from '@crud/Pagination'
 import udOperation from '@crud/UD.operation'
 
 export default {
   name: 'Job',
-  components: {eHeader, eForm, crudOperation, pagination, udOperation},
+  components: { eHeader, eForm, crudOperation, pagination, udOperation },
   cruds() {
     return CRUD({
       title: '岗位',
       url: 'api/job',
       sort: ['jobSort,asc', 'id,desc'],
-      crudMethod: {...crudJob}
+      crudMethod: { ...crudJob }
     })
   },
   mixins: [presenter()],

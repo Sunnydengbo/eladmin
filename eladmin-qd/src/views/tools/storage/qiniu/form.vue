@@ -2,16 +2,16 @@
   <el-dialog :close-on-click-modal="false" :visible.sync="dialog" append-to-body title="七牛云配置" width="580px">
     <el-form ref="form" :model="form" :rules="rules" label-width="110px" size="small" style="margin-top: 6px;">
       <el-form-item label="Access Key" prop="accessKey">
-        <el-input v-model="form.accessKey" placeholder="accessKey，在安全中心，秘钥管理中查看" style="width: 95%"/>
+        <el-input v-model="form.accessKey" placeholder="accessKey，在安全中心，秘钥管理中查看" style="width: 95%" />
       </el-form-item>
       <el-form-item label="Secret Key" prop="secretKey">
-        <el-input v-model="form.secretKey" placeholder="secretKey，在安全中心，秘钥管理中查看" style="width: 95%;" type="password"/>
+        <el-input v-model="form.secretKey" placeholder="secretKey，在安全中心，秘钥管理中查看" style="width: 95%;" type="password" />
       </el-form-item>
       <el-form-item label="空间名称" prop="bucket">
-        <el-input v-model="form.bucket" placeholder="存储空间名称作为唯一的 Bucket 识别符" style="width: 95%;"/>
+        <el-input v-model="form.bucket" placeholder="存储空间名称作为唯一的 Bucket 识别符" style="width: 95%;" />
       </el-form-item>
       <el-form-item label="外链域名" prop="host">
-        <el-input v-model="form.host" placeholder="外链域名，可自定义，需在七牛云绑定" style="width: 95%;"/>
+        <el-input v-model="form.host" placeholder="外链域名，可自定义，需在七牛云绑定" style="width: 95%;" />
       </el-form-item>
       <el-form-item label="存储区域">
         <el-select v-model="form.zone" placeholder="请选择存储区域">
@@ -36,28 +36,28 @@
 </template>
 
 <script>
-import {get, update} from '@/api/tools/qiniu'
+import { get, update } from '@/api/tools/qiniu'
 
 export default {
   data() {
     return {
       zones: ['华东', '华北', '华南', '北美', '东南亚'], dialog: false,
-      loading: false, form: {accessKey: '', secretKey: '', bucket: '', host: '', zone: '', type: ''},
+      loading: false, form: { accessKey: '', secretKey: '', bucket: '', host: '', zone: '', type: '' },
       rules: {
         accessKey: [
-          {required: true, message: '请输入accessKey', trigger: 'blur'}
+          { required: true, message: '请输入accessKey', trigger: 'blur' }
         ],
         secretKey: [
-          {required: true, message: '请输入secretKey', trigger: 'blur'}
+          { required: true, message: '请输入secretKey', trigger: 'blur' }
         ],
         bucket: [
-          {required: true, message: '请输入空间名称', trigger: 'blur'}
+          { required: true, message: '请输入空间名称', trigger: 'blur' }
         ],
         host: [
-          {required: true, message: '请输入外链域名', trigger: 'blur'}
+          { required: true, message: '请输入外链域名', trigger: 'blur' }
         ],
         type: [
-          {required: true, message: '空间类型不能为空', trigger: 'blur'}
+          { required: true, message: '空间类型不能为空', trigger: 'blur' }
         ]
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" :style="'height:'+ height">
-    <iframe :src="src" frameborder="no" scrolling="auto" style="width: 100%;height: 100%"/>
+    <iframe :src="src" frameborder="no" scrolling="auto" style="width: 100%;height: 100%" />
   </div>
 </template>
 <script>
@@ -17,7 +17,7 @@ export default {
       loading: true
     }
   },
-  mounted: function () {
+  mounted: function() {
     setTimeout(() => {
       this.loading = false
     }, 230)

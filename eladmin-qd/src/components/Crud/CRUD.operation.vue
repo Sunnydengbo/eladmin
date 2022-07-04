@@ -2,7 +2,7 @@
   <div class="crud-opts">
     <span class="crud-opts-left">
       <!--左侧插槽-->
-      <slot name="left"/>
+      <slot name="left" />
       <el-button
         v-if="crud.optShow.add"
         v-permission="permission.add"
@@ -51,7 +51,7 @@
         @click="crud.doExport"
       >导出</el-button>
       <!--右侧-->
-      <slot name="right"/>
+      <slot name="right" />
     </span>
     <el-button-group class="crud-opts-right">
       <el-button
@@ -101,7 +101,7 @@
   </div>
 </template>
 <script>
-import CRUD, {crud} from '@crud/crud'
+import CRUD, { crud } from '@crud/crud'
 
 export default {
   mixins: [crud()],
@@ -157,7 +157,7 @@ export default {
       })
       if (selectedCount === 0) {
         this.crud.notify('请至少选择一列', CRUD.NOTIFICATION_TYPE.WARNING)
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           item.visible = true
         })
         return

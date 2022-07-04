@@ -36,34 +36,45 @@
             </el-tooltip>
           </div>
           <el-form label-width="90px" size="small">
-            <el-table v-loading="loading" :data="data" :max-height="tableHeight" size="small"
-                      style="width: 100%;margin-bottom: 15px">
-              <el-table-column label="字段名称" prop="columnName"/>
-              <el-table-column label="字段类型" prop="columnType"/>
+            <el-table
+              v-loading="loading"
+              :data="data"
+              :max-height="tableHeight"
+              size="small"
+              style="width: 100%;margin-bottom: 15px"
+            >
+              <el-table-column label="字段名称" prop="columnName" />
+              <el-table-column label="字段类型" prop="columnType" />
               <el-table-column label="字段描述" prop="remark">
                 <template slot-scope="scope">
-                  <el-input v-model="data[scope.$index].remark" class="edit-input" size="mini"/>
+                  <el-input v-model="data[scope.$index].remark" class="edit-input" size="mini" />
                 </template>
               </el-table-column>
               <el-table-column align="center" label="必填" width="70px">
                 <template slot-scope="scope">
-                  <el-checkbox v-model="data[scope.$index].notNull"/>
+                  <el-checkbox v-model="data[scope.$index].notNull" />
                 </template>
               </el-table-column>
               <el-table-column align="center" label="列表" width="70px">
                 <template slot-scope="scope">
-                  <el-checkbox v-model="data[scope.$index].listShow"/>
+                  <el-checkbox v-model="data[scope.$index].listShow" />
                 </template>
               </el-table-column>
               <el-table-column align="center" label="表单" width="70px">
                 <template slot-scope="scope">
-                  <el-checkbox v-model="data[scope.$index].formShow"/>
+                  <el-checkbox v-model="data[scope.$index].formShow" />
                 </template>
               </el-table-column>
               <el-table-column label="表单类型">
                 <template slot-scope="scope">
-                  <el-select v-model="data[scope.$index].formType" class="edit-input" clearable filterable
-                             placeholder="请选择" size="mini">
+                  <el-select
+                    v-model="data[scope.$index].formType"
+                    class="edit-input"
+                    clearable
+                    filterable
+                    placeholder="请选择"
+                    size="mini"
+                  >
                     <el-option
                       label="文本框"
                       value="Input"
@@ -89,8 +100,14 @@
               </el-table-column>
               <el-table-column label="查询方式">
                 <template slot-scope="scope">
-                  <el-select v-model="data[scope.$index].queryType" class="edit-input" clearable filterable
-                             placeholder="请选择" size="mini">
+                  <el-select
+                    v-model="data[scope.$index].queryType"
+                    class="edit-input"
+                    clearable
+                    filterable
+                    placeholder="请选择"
+                    size="mini"
+                  >
                     <el-option
                       label="="
                       value="="
@@ -124,8 +141,14 @@
               </el-table-column>
               <el-table-column label="日期注解">
                 <template slot-scope="scope">
-                  <el-select v-model="data[scope.$index].dateAnnotation" class="edit-input" clearable filterable
-                             placeholder="请选择" size="mini">
+                  <el-select
+                    v-model="data[scope.$index].dateAnnotation"
+                    class="edit-input"
+                    clearable
+                    filterable
+                    placeholder="请选择"
+                    size="mini"
+                  >
                     <el-option
                       label="自动创建时间"
                       value="CreationTimestamp"
@@ -139,10 +162,20 @@
               </el-table-column>
               <el-table-column label="关联字典">
                 <template slot-scope="scope">
-                  <el-select v-model="data[scope.$index].dictName" class="edit-input" clearable filterable
-                             placeholder="请选择" size="mini">
-                    <el-option v-for="item in dicts" :key="item.id"
-                               :label="item.remark === '' ? item.name : item.remark" :value="item.name"/>
+                  <el-select
+                    v-model="data[scope.$index].dictName"
+                    class="edit-input"
+                    clearable
+                    filterable
+                    placeholder="请选择"
+                    size="mini"
+                  >
+                    <el-option
+                      v-for="item in dicts"
+                      :key="item.id"
+                      :label="item.remark === '' ? item.name : item.remark"
+                      :value="item.name"
+                    />
                   </el-select>
                 </template>
               </el-table-column>
@@ -166,23 +199,23 @@
           </div>
           <el-form ref="form" :model="form" :rules="rules" label-width="78px" size="small">
             <el-form-item label="作者名称" prop="author">
-              <el-input v-model="form.author" style="width: 40%"/>
+              <el-input v-model="form.author" style="width: 40%" />
               <span style="color: #C0C0C0;margin-left: 10px;">类上面的作者名称</span>
             </el-form-item>
             <el-form-item label="模块名称" prop="moduleName">
-              <el-input v-model="form.moduleName" style="width: 40%"/>
+              <el-input v-model="form.moduleName" style="width: 40%" />
               <span style="color: #C0C0C0;margin-left: 10px;">模块的名称，请选择项目中已存在的模块</span>
             </el-form-item>
             <el-form-item label="至于包下" prop="pack">
-              <el-input v-model="form.pack" style="width: 40%"/>
+              <el-input v-model="form.pack" style="width: 40%" />
               <span style="color: #C0C0C0;margin-left: 10px;">项目包的名称，生成的代码放到哪个包里面</span>
             </el-form-item>
             <el-form-item label="接口名称" prop="apiAlias">
-              <el-input v-model="form.apiAlias" style="width: 40%"/>
+              <el-input v-model="form.apiAlias" style="width: 40%" />
               <span style="color: #C0C0C0;margin-left: 10px;">接口的名称，用于控制器与接口文档中</span>
             </el-form-item>
             <el-form-item label="前端路径" prop="path">
-              <el-input v-model="form.path" style="width: 40%"/>
+              <el-input v-model="form.path" style="width: 40%" />
               <span style="color: #C0C0C0;margin-left: 10px;">输入views文件夹下的目录，不存在即创建</span>
             </el-form-item>
             <!--            <el-form-item label="接口目录">-->
@@ -190,7 +223,7 @@
             <!--              <span style="color: #C0C0C0;margin-left: 10px;">Api存放路径[src/api]，为空则自动生成路径</span>-->
             <!--            </el-form-item>-->
             <el-form-item label="去表前缀" prop="prefix">
-              <el-input v-model="form.prefix" placeholder="默认不去除表前缀" style="width: 40%"/>
+              <el-input v-model="form.prefix" placeholder="默认不去除表前缀" style="width: 40%" />
               <span style="color: #C0C0C0;margin-left: 10px;">默认不去除表前缀，可自定义</span>
             </el-form-item>
             <el-form-item label="是否覆盖" prop="cover">
@@ -209,9 +242,9 @@
 
 <script>
 import crud from '@/mixins/crud'
-import {get, update} from '@/api/generator/genConfig'
-import {generator, save, sync} from '@/api/generator/generator'
-import {getDicts} from '@/api/system/dict'
+import { get, update } from '@/api/generator/genConfig'
+import { generator, save, sync } from '@/api/generator/generator'
+import { getDicts } from '@/api/system/dict'
 
 export default {
   name: 'GeneratorConfig',
@@ -241,22 +274,22 @@ export default {
       },
       rules: {
         author: [
-          {required: true, message: '作者不能为空', trigger: 'blur'}
+          { required: true, message: '作者不能为空', trigger: 'blur' }
         ],
         pack: [
-          {required: true, message: '包路径不能为空', trigger: 'blur'}
+          { required: true, message: '包路径不能为空', trigger: 'blur' }
         ],
         moduleName: [
-          {required: true, message: '包路径不能为空', trigger: 'blur'}
+          { required: true, message: '包路径不能为空', trigger: 'blur' }
         ],
         path: [
-          {required: true, message: '前端路径不能为空', trigger: 'blur'}
+          { required: true, message: '前端路径不能为空', trigger: 'blur' }
         ],
         apiAlias: [
-          {required: true, message: '接口名称不能为空', trigger: 'blur'}
+          { required: true, message: '接口名称不能为空', trigger: 'blur' }
         ],
         cover: [
-          {required: true, message: '不能为空', trigger: 'blur'}
+          { required: true, message: '不能为空', trigger: 'blur' }
         ]
       }
     }
@@ -279,7 +312,7 @@ export default {
     beforeInit() {
       this.url = 'api/generator/columns'
       const tableName = this.tableName
-      this.params = {tableName}
+      this.params = { tableName }
       return true
     },
     saveColumnConfig() {

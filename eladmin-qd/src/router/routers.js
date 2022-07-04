@@ -7,7 +7,7 @@ Vue.use(Router)
 export const constantRouterMap = [
   {
     path: '/login',
-    meta: {title: '登录', noCache: true},
+    meta: { title: '登录', noCache: true },
     component: (resolve) => require(['@/views/login'], resolve),
     hidden: true
   },
@@ -41,7 +41,7 @@ export const constantRouterMap = [
         path: 'dashboard',
         component: (resolve) => require(['@/views/home'], resolve),
         name: 'Dashboard',
-        meta: {title: '首页', icon: 'index', affix: true, noCache: true}
+        meta: { title: '首页', icon: 'index', affix: true, noCache: true }
       }
     ]
   },
@@ -55,7 +55,7 @@ export const constantRouterMap = [
         path: 'center',
         component: (resolve) => require(['@/views/system/user/center'], resolve),
         name: '个人中心',
-        meta: {title: '个人中心'}
+        meta: { title: '个人中心' }
       }
     ]
   }
@@ -63,6 +63,6 @@ export const constantRouterMap = [
 
 export default new Router({
   mode: 'history',
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })

@@ -4,8 +4,14 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.appName" class="filter-item" clearable placeholder="输入应用名称查询" style="width: 200px"
-                  @keyup.enter.native="crud.toQuery"/>
+        <el-input
+          v-model="query.appName"
+          class="filter-item"
+          clearable
+          placeholder="输入应用名称查询"
+          style="width: 200px"
+          @keyup.enter.native="crud.toQuery"
+        />
         <el-date-picker
           v-model="query.createTime"
           :default-time="['00:00:00','23:59:59']"
@@ -17,7 +23,7 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <rrOperation/>
+        <rrOperation />
       </div>
       <crudOperation :permission="permission">
         <template slot="right">
@@ -75,17 +81,23 @@
       </crudOperation>
     </div>
     <!--表单组件-->
-    <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.title"
-               :visible.sync="crud.status.cu > 0" append-to-body width="500px">
+    <el-dialog
+      :before-close="crud.cancelCU"
+      :close-on-click-modal="false"
+      :title="crud.status.title"
+      :visible.sync="crud.status.cu > 0"
+      append-to-body
+      width="500px"
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" size="small">
         <el-form-item label="应用" prop="app.id">
           <el-select v-model.number="form.app.id" placeholder="请选择" style="width: 370px">
-            <el-option v-for="item in apps" :key="item.id" :label="item.name" :value="item.id"/>
+            <el-option v-for="item in apps" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
         <el-form-item label="服务器" prop="deploys">
           <el-select v-model="form.deploys" multiple placeholder="请选择" style="width: 370px">
-            <el-option v-for="item in servers" :key="item.id" :label="item.name" :value="item.id"/>
+            <el-option v-for="item in servers" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -95,14 +107,21 @@
       </div>
     </el-dialog>
     <!--统还原组件-->
-    <fForm :key="times" ref="sysRestore" :app-name="appName"/>
-    <dForm ref="deploy"/>
+    <fForm :key="times" ref="sysRestore" :app-name="appName" />
+    <dForm ref="deploy" />
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" highlight-current-row stripe style="width: 100%"
-              @selection-change="handleCurrentChange">
-      <el-table-column type="selection" width="55"/>
-      <el-table-column label="应用名称" prop="app.name"/>
-      <el-table-column label="服务器列表" prop="servers"/>
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      highlight-current-row
+      stripe
+      style="width: 100%"
+      @selection-change="handleCurrentChange"
+    >
+      <el-table-column type="selection" width="55" />
+      <el-table-column label="应用名称" prop="app.name" />
+      <el-table-column label="服务器列表" prop="servers" />
       <el-table-column label="部署日期" prop="createTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -118,7 +137,7 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
   </div>
 </template>
 
@@ -126,18 +145,18 @@
 import crudDeploy from '@/api/mnt/deploy'
 import dForm from './deploy'
 import fForm from './sysRestore'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = {id: null, app: {id: null}, deploys: []}
+const defaultForm = { id: null, app: { id: null }, deploys: [] }
 export default {
   name: 'Deploy',
-  components: {dForm, fForm, pagination, crudOperation, rrOperation, udOperation},
+  components: { dForm, fForm, pagination, crudOperation, rrOperation, udOperation },
   cruds() {
-    return CRUD({title: '部署', url: 'api/deploy', crudMethod: {...crudDeploy}})
+    return CRUD({ title: '部署', url: 'api/deploy', crudMethod: { ...crudDeploy }})
   },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   data() {
@@ -151,10 +170,10 @@ export default {
       },
       rules: {
         'app.id': [
-          {required: true, message: '应用不能为空', trigger: 'blur', type: 'number'}
+          { required: true, message: '应用不能为空', trigger: 'blur', type: 'number' }
         ],
         deploys: [
-          {required: true, message: '服务器不能为空', trigger: 'blur'}
+          { required: true, message: '服务器不能为空', trigger: 'blur' }
         ]
       }
     }
@@ -168,7 +187,7 @@ export default {
     [CRUD.HOOK.beforeToCU](crud, form) {
       this.initSelect()
       const deploys = []
-      form.deploys.forEach(function (deploy, index) {
+      form.deploys.forEach(function(deploy, index) {
         deploys.push(deploy.id)
       })
       this.form.deploys = deploys
@@ -176,8 +195,8 @@ export default {
     // 提交前
     [CRUD.HOOK.beforeSubmit]() {
       const deploys = []
-      this.form.deploys.forEach(function (data, index) {
-        const deploy = {id: data}
+      this.form.deploys.forEach(function(data, index) {
+        const deploy = { id: data }
         deploys.push(deploy)
       })
       this.form.deploys = deploys

@@ -4,8 +4,14 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.blurry" class="filter-item" clearable placeholder="模糊搜索" style="width: 200px"
-                  @keyup.enter.native="crud.toQuery"/>
+        <el-input
+          v-model="query.blurry"
+          class="filter-item"
+          clearable
+          placeholder="模糊搜索"
+          style="width: 200px"
+          @keyup.enter.native="crud.toQuery"
+        />
         <el-date-picker
           v-model="query.createTime"
           :default-time="['00:00:00','23:59:59']"
@@ -17,7 +23,7 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <rrOperation/>
+        <rrOperation />
       </div>
       <crudOperation :permission="permission">
         <el-button
@@ -34,22 +40,28 @@
       </crudOperation>
     </div>
     <!--表单组件-->
-    <eForm ref="execute" :database-info="currentRow"/>
-    <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.title"
-               :visible.sync="crud.status.cu > 0" append-to-body width="530px">
+    <eForm ref="execute" :database-info="currentRow" />
+    <el-dialog
+      :before-close="crud.cancelCU"
+      :close-on-click-modal="false"
+      :title="crud.status.title"
+      :visible.sync="crud.status.cu > 0"
+      append-to-body
+      width="530px"
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="100px" size="small">
         <el-form-item label="连接名称" prop="name">
-          <el-input v-model="form.name" style="width: 370px"/>
+          <el-input v-model="form.name" style="width: 370px" />
         </el-form-item>
         <el-form-item label="JDBC地址" prop="jdbcUrl">
-          <el-input v-model="form.jdbcUrl" style="width: 300px"/>
+          <el-input v-model="form.jdbcUrl" style="width: 300px" />
           <el-button :loading="loading" type="success" @click="testConnectDatabase">测试</el-button>
         </el-form-item>
         <el-form-item label="用户" prop="userName">
-          <el-input v-model="form.userName" style="width: 370px"/>
+          <el-input v-model="form.userName" style="width: 370px" />
         </el-form-item>
         <el-form-item label="密码" prop="pwd">
-          <el-input v-model="form.pwd" style="width: 370px" type="password"/>
+          <el-input v-model="form.pwd" style="width: 370px" type="password" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -58,12 +70,19 @@
       </div>
     </el-dialog>
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" highlight-current-row stripe style="width: 100%"
-              @selection-change="handleCurrentChange">
-      <el-table-column type="selection" width="55"/>
-      <el-table-column label="数据库名称" prop="name" width="130px"/>
-      <el-table-column label="连接地址" prop="jdbcUrl"/>
-      <el-table-column label="用户名" prop="userName" width="200px"/>
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      highlight-current-row
+      stripe
+      style="width: 100%"
+      @selection-change="handleCurrentChange"
+    >
+      <el-table-column type="selection" width="55" />
+      <el-table-column label="数据库名称" prop="name" width="130px" />
+      <el-table-column label="连接地址" prop="jdbcUrl" />
+      <el-table-column label="用户名" prop="userName" width="200px" />
       <el-table-column label="创建日期" prop="createTime" width="200px">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -79,26 +98,26 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
   </div>
 </template>
 
 <script>
 import crudDatabase from '@/api/mnt/database'
-import {testDbConnect} from '@/api/mnt/connect'
+import { testDbConnect } from '@/api/mnt/connect'
 import eForm from './execute'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = {id: null, name: null, jdbcUrl: 'jdbc:mysql://', userName: null, pwd: null}
+const defaultForm = { id: null, name: null, jdbcUrl: 'jdbc:mysql://', userName: null, pwd: null }
 export default {
   name: 'DataBase',
-  components: {eForm, pagination, crudOperation, rrOperation, udOperation},
+  components: { eForm, pagination, crudOperation, rrOperation, udOperation },
   cruds() {
-    return CRUD({title: '数据库', url: 'api/database', crudMethod: {...crudDatabase}})
+    return CRUD({ title: '数据库', url: 'api/database', crudMethod: { ...crudDatabase }})
   },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   data() {
@@ -114,16 +133,16 @@ export default {
       },
       rules: {
         name: [
-          {required: true, message: '请输入数据库名称', trigger: 'blur'}
+          { required: true, message: '请输入数据库名称', trigger: 'blur' }
         ],
         jdbcUrl: [
-          {required: true, message: '请输入数据库连接地址', trigger: 'blur'}
+          { required: true, message: '请输入数据库连接地址', trigger: 'blur' }
         ],
         userName: [
-          {required: true, message: '请输入用户名', trigger: 'blur'}
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         pwd: [
-          {required: true, message: '请输入数据库密码', trigger: 'blur'}
+          { required: true, message: '请输入数据库密码', trigger: 'blur' }
         ]
       }
     }

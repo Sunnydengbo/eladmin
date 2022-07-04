@@ -4,8 +4,15 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <el-input v-model="query.blurry" class="filter-item" clearable placeholder="输入内容模糊搜索" size="small"
-                  style="width: 200px;" @keyup.enter.native="crud.toQuery"/>
+        <el-input
+          v-model="query.blurry"
+          class="filter-item"
+          clearable
+          placeholder="输入内容模糊搜索"
+          size="small"
+          style="width: 200px;"
+          @keyup.enter.native="crud.toQuery"
+        />
         <el-date-picker
           v-model="query.createTime"
           :default-time="['00:00:00','23:59:59']"
@@ -17,7 +24,7 @@
           type="daterange"
           value-format="yyyy-MM-dd HH:mm:ss"
         />
-        <rrOperation/>
+        <rrOperation />
       </div>
       <crudOperation :permission="permission">
         <!-- 新增 -->
@@ -34,11 +41,17 @@
       </crudOperation>
     </div>
     <!--表单组件-->
-    <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.add ? '文件上传' : '编辑文件'"
-               :visible.sync="crud.status.cu > 0" append-to-body width="500px">
+    <el-dialog
+      :before-close="crud.cancelCU"
+      :close-on-click-modal="false"
+      :title="crud.status.add ? '文件上传' : '编辑文件'"
+      :visible.sync="crud.status.cu > 0"
+      append-to-body
+      width="500px"
+    >
       <el-form ref="form" :model="form" label-width="80px" size="small">
         <el-form-item label="文件名">
-          <el-input v-model="form.name" style="width: 370px;"/>
+          <el-input v-model="form.name" style="width: 370px;" />
         </el-form-item>
         <!--   上传文件   -->
         <el-form-item v-if="crud.status.add" label="上传">
@@ -52,7 +65,7 @@
             :on-error="handleError"
             :on-success="handleSuccess"
           >
-            <div class="eladmin-upload"><i class="el-icon-upload"/> 添加文件</div>
+            <div class="eladmin-upload"><i class="el-icon-upload" /> 添加文件</div>
             <div slot="tip" class="el-upload__tip">可上传任意格式文件，且不超过100M</div>
           </el-upload>
         </el-form-item>
@@ -64,9 +77,14 @@
       </div>
     </el-dialog>
     <!--表格渲染-->
-    <el-table ref="table" v-loading="crud.loading" :data="crud.data" style="width: 100%;"
-              @selection-change="crud.selectionChangeHandler">
-      <el-table-column type="selection" width="55"/>
+    <el-table
+      ref="table"
+      v-loading="crud.loading"
+      :data="crud.data"
+      style="width: 100%;"
+      @selection-change="crud.selectionChangeHandler"
+    >
+      <el-table-column type="selection" width="55" />
       <el-table-column label="文件名" prop="name">
         <template slot-scope="scope">
           <el-popover
@@ -98,15 +116,15 @@
             lazy
           >
             <div slot="error">
-              <i class="el-icon-document"/>
+              <i class="el-icon-document" />
             </div>
           </el-image>
         </template>
       </el-table-column>
-      <el-table-column label="文件类型" prop="suffix"/>
-      <el-table-column label="类别" prop="type"/>
-      <el-table-column label="大小" prop="size"/>
-      <el-table-column label="操作人" prop="operate"/>
+      <el-table-column label="文件类型" prop="suffix" />
+      <el-table-column label="类别" prop="type" />
+      <el-table-column label="大小" prop="size" />
+      <el-table-column label="操作人" prop="operate" />
       <el-table-column label="创建日期" prop="createTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -114,31 +132,31 @@
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <pagination/>
+    <pagination />
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import {getToken} from '@/utils/auth'
+import { mapGetters } from 'vuex'
+import { getToken } from '@/utils/auth'
 import crudFile from '@/api/tools/localStorage'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = {id: null, name: ''}
+const defaultForm = { id: null, name: '' }
 export default {
-  components: {pagination, crudOperation, rrOperation},
+  components: { pagination, crudOperation, rrOperation },
   cruds() {
-    return CRUD({title: '文件', url: 'api/localStorage', crudMethod: {...crudFile}})
+    return CRUD({ title: '文件', url: 'api/localStorage', crudMethod: { ...crudFile }})
   },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   data() {
     return {
       delAllLoading: false,
       loading: false,
-      headers: {'Authorization': getToken()},
+      headers: { 'Authorization': getToken() },
       permission: {
         edit: ['admin', 'storage:edit'],
         del: ['admin', 'storage:del']

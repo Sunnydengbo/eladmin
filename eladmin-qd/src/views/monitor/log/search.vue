@@ -19,16 +19,16 @@
       type="daterange"
       value-format="yyyy-MM-dd HH:mm:ss"
     />
-    <rrOperation/>
+    <rrOperation />
   </div>
 </template>
 
 <script>
-import {header} from '@crud/crud'
+import { header } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 
 export default {
-  components: {rrOperation},
+  components: { rrOperation },
   mixins: [header()]
 }
 </script>

@@ -1,25 +1,41 @@
 <template>
   <div :style="'background-image:url('+ Background +');'" class="login">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" label-position="left"
-             label-width="0px">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      label-position="left"
+      label-width="0px"
+    >
       <h3 class="title">
         EL-ADMIN 后台管理系统
       </h3>
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" auto-complete="off" placeholder="账号" type="text">
-          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="user"/>
+          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="user" />
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.password" auto-complete="off" placeholder="密码" type="password"
-                  @keyup.enter.native="handleLogin">
-          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="password"/>
+        <el-input
+          v-model="loginForm.password"
+          auto-complete="off"
+          placeholder="密码"
+          type="password"
+          @keyup.enter.native="handleLogin"
+        >
+          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="password" />
         </el-input>
       </el-form-item>
       <el-form-item prop="code">
-        <el-input v-model="loginForm.code" auto-complete="off" placeholder="验证码" style="width: 63%"
-                  @keyup.enter.native="handleLogin">
-          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="validCode"/>
+        <el-input
+          v-model="loginForm.code"
+          auto-complete="off"
+          placeholder="验证码"
+          style="width: 63%"
+          @keyup.enter.native="handleLogin"
+        >
+          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="validCode" />
         </el-input>
         <div class="login-code">
           <img :src="codeUrl" @click="getCode">
@@ -29,8 +45,13 @@
         记住我
       </el-checkbox>
       <el-form-item style="width:100%;">
-        <el-button :loading="loading" size="medium" style="width:100%;" type="primary"
-                   @click.native.prevent="handleLogin">
+        <el-button
+          :loading="loading"
+          size="medium"
+          style="width:100%;"
+          type="primary"
+          @click.native.prevent="handleLogin"
+        >
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
@@ -38,7 +59,7 @@
     </el-form>
     <!--  底部  -->
     <div v-if="$store.state.settings.showFooter" id="el-login-footer">
-      <span v-html="$store.state.settings.footerTxt"/>
+      <span v-html="$store.state.settings.footerTxt" />
       <span> ⋅ </span>
       <a href="http://www.beian.miit.gov.cn" target="_blank">{{ $store.state.settings.caseNumber }}</a>
     </div>
@@ -46,9 +67,9 @@
 </template>
 
 <script>
-import {encrypt} from '@/utils/rsaEncrypt'
+import { encrypt } from '@/utils/rsaEncrypt'
 import Config from '@/settings'
-import {getCodeImg} from '@/api/login'
+import { getCodeImg } from '@/api/login'
 import Cookies from 'js-cookie'
 import Background from '@/assets/images/background.jpg'
 
@@ -68,9 +89,9 @@ export default {
         uuid: ''
       },
       loginRules: {
-        username: [{required: true, trigger: 'blur', message: '用户名不能为空'}],
-        password: [{required: true, trigger: 'blur', message: '密码不能为空'}],
-        code: [{required: true, trigger: 'change', message: '验证码不能为空'}]
+        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
+        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }],
+        code: [{ required: true, trigger: 'change', message: '验证码不能为空' }]
       },
       loading: false,
       redirect: undefined
@@ -78,7 +99,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
@@ -89,7 +110,7 @@ export default {
     this.getCookie()
   },
   mounted() {
-    this.loadingIns = this.$loading({target: '.login-code', fullscreen: false})
+    this.loadingIns = this.$loading({ target: '.login-code', fullscreen: false })
   },
   methods: {
     getCode() {
@@ -131,9 +152,9 @@ export default {
         if (valid) {
           this.loading = true
           if (user.rememberMe) {
-            Cookies.set('username', user.username, {expires: Config.passCookieExpires})
-            Cookies.set('password', user.password, {expires: Config.passCookieExpires})
-            Cookies.set('rememberMe', user.rememberMe, {expires: Config.passCookieExpires})
+            Cookies.set('username', user.username, { expires: Config.passCookieExpires })
+            Cookies.set('password', user.password, { expires: Config.passCookieExpires })
+            Cookies.set('rememberMe', user.rememberMe, { expires: Config.passCookieExpires })
           } else {
             Cookies.remove('username')
             Cookies.remove('password')
@@ -141,7 +162,7 @@ export default {
           }
           this.$store.dispatch('Login', user).then(() => {
             this.loading = false
-            this.$router.push({path: this.redirect || '/'})
+            this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             this.loading = false
             this.getCode()

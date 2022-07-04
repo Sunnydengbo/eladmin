@@ -10,5 +10,5 @@ const lang = {
   about: 'Sobre',
   born: 'Nascido em',
   bornIn: 'em'
-};
-export default lang;
+}
+export default lang

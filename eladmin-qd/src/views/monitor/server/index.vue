@@ -1,10 +1,14 @@
 <template>
-  <div v-loading="!show" :style="!show ? 'height: 500px' : 'height: 100%'" class="app-container"
-       element-loading-text="数据加载中...">
+  <div
+    v-loading="!show"
+    :style="!show ? 'height: 500px' : 'height: 100%'"
+    class="app-container"
+    element-loading-text="数据加载中..."
+  >
     <div v-if="show">
       <el-card class="box-card">
         <div style="color: #666;font-size: 13px;">
-          <svg-icon icon-class="system" style="margin-right: 5px"/>
+          <svg-icon icon-class="system" style="margin-right: 5px" />
           <span>
             系统：{{ data.sys.os }}
           </span>
@@ -14,7 +18,7 @@
           <span>
             项目已不间断运行：{{ data.sys.day }}
           </span>
-          <i class="el-icon-refresh" style="margin-left: 40px" @click="init"/>
+          <i class="el-icon-refresh" style="margin-left: 40px" @click="init" />
         </div>
       </el-card>
       <el-card class="box-card">
@@ -40,7 +44,7 @@
                 </div>
               </div>
               <div class="content">
-                <el-progress :percentage="parseFloat(data.cpu.used)" type="circle"/>
+                <el-progress :percentage="parseFloat(data.cpu.used)" type="circle" />
               </div>
             </el-tooltip>
             <div class="footer">{{ data.cpu.coreNumber }} 核心</div>
@@ -60,7 +64,7 @@
                 </div>
               </div>
               <div class="content">
-                <el-progress :percentage="parseFloat(data.memory.usageRate)" type="circle"/>
+                <el-progress :percentage="parseFloat(data.memory.usageRate)" type="circle" />
               </div>
             </el-tooltip>
             <div class="footer">{{ data.memory.used }} / {{ data.memory.total }}</div>
@@ -80,7 +84,7 @@
                 </div>
               </div>
               <div class="content">
-                <el-progress :percentage="parseFloat(data.swap.usageRate)" type="circle"/>
+                <el-progress :percentage="parseFloat(data.swap.usageRate)" type="circle" />
               </div>
             </el-tooltip>
             <div class="footer">{{ data.swap.used }} / {{ data.swap.total }}</div>
@@ -98,7 +102,7 @@
                   </div>
                 </div>
                 <div class="content">
-                  <el-progress :percentage="parseFloat(data.disk.usageRate)" type="circle"/>
+                  <el-progress :percentage="parseFloat(data.disk.usageRate)" type="circle" />
                 </div>
               </el-tooltip>
             </div>
@@ -115,7 +119,7 @@
                 <span style="font-weight: bold;color: #666;font-size: 15px">CPU使用率监控</span>
               </div>
               <div>
-                <v-chart :options="cpuInfo"/>
+                <v-chart :options="cpuInfo" />
               </div>
             </el-card>
           </el-col>
@@ -125,7 +129,7 @@
                 <span style="font-weight: bold;color: #666;font-size: 15px">内存使用率监控</span>
               </div>
               <div>
-                <v-chart :options="memoryInfo"/>
+                <v-chart :options="memoryInfo" />
               </div>
             </el-card>
           </el-col>
@@ -139,7 +143,7 @@
 import ECharts from 'vue-echarts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/polar'
-import {initData} from '@/api/data'
+import { initData } from '@/api/data'
 
 export default {
   name: 'ServerMonitor',

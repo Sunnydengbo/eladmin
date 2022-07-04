@@ -1,10 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import {debounce} from '@/utils'
+import { debounce } from '@/utils'
 
 require('echarts/theme/macarons') // echarts theme
 
@@ -63,8 +63,8 @@ export default {
           {
             name: '业务指标',
             type: 'gauge',
-            detail: {formatter: '{value}%'},
-            data: [{value: 50, name: '完成率'}]
+            detail: { formatter: '{value}%' },
+            data: [{ value: 50, name: '完成率' }]
           }
         ]
       })

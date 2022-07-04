@@ -4,5 +4,5 @@ const lang = {
   education: 'Eğitim',
   skills: 'Yetenekler',
   about: 'Hakkımda'
-};
-export default lang;
+}
+export default lang

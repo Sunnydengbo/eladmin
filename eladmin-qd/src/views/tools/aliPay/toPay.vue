@@ -2,14 +2,14 @@
   <div>
     <el-form ref="form" :model="form" :rules="rules" label-width="90px" size="small" style="margin-top: 6px;">
       <el-form-item label="商品名称" prop="subject">
-        <el-input v-model="form.subject" style="width: 35%"/>
+        <el-input v-model="form.subject" style="width: 35%" />
       </el-form-item>
       <el-form-item label="商品价格" prop="totalAmount">
-        <el-input v-model="form.totalAmount" style="width: 35%"/>
+        <el-input v-model="form.totalAmount" style="width: 35%" />
         <span style="color: #C0C0C0;margin-left: 10px;">测试允许区间(0,5000]</span>
       </el-form-item>
       <el-form-item label="商品描述" prop="body">
-        <el-input v-model="form.body" rows="8" style="width: 35%" type="textarea"/>
+        <el-input v-model="form.body" rows="8" style="width: 35%" type="textarea" />
       </el-form-item>
       <el-form-item label="">
         <el-button :loading="loading" size="medium" type="primary" @click="doSubmit">去支付</el-button>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {toAliPay} from '@/api/tools/alipay'
+import { toAliPay } from '@/api/tools/alipay'
 
 export default {
   data() {
@@ -27,16 +27,16 @@ export default {
       url: '',
       // 新窗口的引用
       newWin: null,
-      loading: false, form: {subject: '', totalAmount: '', body: ''},
+      loading: false, form: { subject: '', totalAmount: '', body: '' },
       rules: {
         subject: [
-          {required: true, message: '商品名称不能为空', trigger: 'blur'}
+          { required: true, message: '商品名称不能为空', trigger: 'blur' }
         ],
         totalAmount: [
-          {required: true, message: '商品价格不能为空', trigger: 'blur'}
+          { required: true, message: '商品价格不能为空', trigger: 'blur' }
         ],
         body: [
-          {required: true, message: '商品描述不能为空', trigger: 'blur'}
+          { required: true, message: '商品描述不能为空', trigger: 'blur' }
         ]
       }
     }

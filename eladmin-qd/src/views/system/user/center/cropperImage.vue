@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import {VueCropper} from 'vue-cropper'
+import { VueCropper } from 'vue-cropper'
 
 export default {
   name: 'ImageCropper',
@@ -191,7 +191,7 @@ export default {
       while (len--) {
         u8arr[len] = bstr.charCodeAt(len)
       }
-      return new File([u8arr], filename, {type: mime})
+      return new File([u8arr], filename, { type: mime })
     },
     // 将base64转换为png文件图片
     finish() {

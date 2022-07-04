@@ -1,10 +1,10 @@
 <template>
   <el-tabs v-model="activeName" style="padding-left: 8px;" @tab-click="tabClick">
     <el-tab-pane label="本地存储" name="first">
-      <Local ref="local"/>
+      <Local ref="local" />
     </el-tab-pane>
     <el-tab-pane label="七牛云存储" name="second">
-      <QiNiu ref="qiNiu"/>
+      <QiNiu ref="qiNiu" />
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -15,7 +15,7 @@ import Local from './local/index'
 
 export default {
   name: 'Storage',
-  components: {QiNiu, Local},
+  components: { QiNiu, Local },
   data() {
     return {
       activeName: 'first'

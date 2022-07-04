@@ -32,4 +32,4 @@ export function testDbConnection(data) {
   })
 }
 
-export default {add, edit, del, testDbConnection}
+export default { add, edit, del, testDbConnection }

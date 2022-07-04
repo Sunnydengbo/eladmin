@@ -6,30 +6,35 @@
         <h1 id="name">{{ person.name.first }} {{ person.name.last }}</h1>
         <div id="info-flex">
           <span id="email"><a :href="'mailto:' + person.contact.email">
-            <i aria-hidden="true" class="fa fa-envelope"/> {{ person.contact.email }}</a></span>
-          <span id="phone"><i aria-hidden="true" class="fa fa-phone-square"/> {{ person.contact.phone }}</span>
-          <span v-if="person.contact.website" id="website"><a :href="person.contact.website"><i aria-hidden="true"
-                                                                                                class="fa fa-home"/> {{
-              person.contact.website
-            }}</a></span>
-          <span v-if="person.contact.github" id="github"><a :href="contactLinks.github"><i aria-hidden="true"
-                                                                                           class="fa fa-github"/> {{
-              person.contact.github
-            }}</a></span>
+            <i aria-hidden="true" class="fa fa-envelope" /> {{ person.contact.email }}</a></span>
+          <span id="phone"><i aria-hidden="true" class="fa fa-phone-square" /> {{ person.contact.phone }}</span>
+          <span v-if="person.contact.website" id="website"><a :href="person.contact.website"><i
+            aria-hidden="true"
+            class="fa fa-home"
+          /> {{
+            person.contact.website
+          }}</a></span>
+          <span v-if="person.contact.github" id="github"><a :href="contactLinks.github"><i
+            aria-hidden="true"
+            class="fa fa-github"
+          /> {{
+            person.contact.github
+          }}</a></span>
         </div>
       </div>
       <div id="header-right">
-        <div id="headshot"/>
+        <div id="headshot" />
       </div>
     </div>
     <div id="resume-body">
       <div id="experience-container">
         <h2 id="experience-title">{{ lang.experience }}</h2>
-        <div class="spacer"/>
+        <div class="spacer" />
         <div v-for="experience in person.experience" :key="experience.company" class="experience">
           <h2 class="company">{{ experience.company }}</h2>
           <p class="job-info"><span class="job-title">{{ experience.position }} | </span><span
-            class="experience-timeperiod">{{ experience.timeperiod }}</span></p>
+            class="experience-timeperiod"
+          >{{ experience.timeperiod }}</span></p>
           <p v-if="experience.description" class="job-description">{{ experience.description }}</p>
           <ul v-if="experience.list">
             <li v-for="(item, index) in experience.list" :key="index">
@@ -42,16 +47,17 @@
       </div>
       <div id="education-container">
         <h2 id="education-title">{{ lang.education }}</h2>
-        <div class="spacer"/>
+        <div class="spacer" />
         <div v-for="education in person.education" :key="education.degree" class="education">
           <h2 class="education-description">{{ education.description }}</h2>
           <p><span class="degree">{{ education.degree }} | </span><span
-            class="education-timeperiod">{{ education.timeperiod }}</span></p>
+            class="education-timeperiod"
+          >{{ education.timeperiod }}</span></p>
         </div>
       </div>
       <div v-if="person.skills != []" id="skills-container">
         <h2 id="skills-title">{{ lang.skills }}</h2>
-        <div class="spacer"/>
+        <div class="spacer" />
         <p id="skill-description">{{ person.knowledge }}</p>
         <ul id="skill-list">
           <li v-for="skill in person.skills" :key="skill.name" class="skill">
@@ -73,7 +79,7 @@
 
 <script>
 import Vue from 'vue'
-import {getVueOptions} from './options'
+import { getVueOptions } from './options'
 
 const name = 'purple'
 export default Vue.component(name, getVueOptions(name))

@@ -1,6 +1,6 @@
 import Dict from './Dict'
 
-const install = function (Vue) {
+const install = function(Vue) {
   Vue.mixin({
     data() {
       if (this.$options.dicts instanceof Array) {
@@ -26,4 +26,4 @@ const install = function (Vue) {
   })
 }
 
-export default {install}
+export default { install }

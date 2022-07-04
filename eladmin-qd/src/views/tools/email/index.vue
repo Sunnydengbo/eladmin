@@ -1,10 +1,10 @@
 <template>
   <el-tabs v-model="activeName" style="padding-left: 8px;">
     <el-tab-pane label="邮箱配置" name="first">
-      <Config/>
+      <Config />
     </el-tab-pane>
     <el-tab-pane label="发送邮件" name="second">
-      <Send/>
+      <Send />
     </el-tab-pane>
     <el-tab-pane label="使用说明" name="third">
       <div>
@@ -17,8 +17,11 @@
  # 密码（注意，某些邮箱需要为SMTP服务单独设置密码，如QQ和163等等）
  # 是否开启ssl，默认开启</pre>
         <blockquote class="my-blockquote">更多帮助</blockquote>
-        <pre class="my-code">更多帮助请查看文档：<a href="http://hutool.mydoc.io/#text_319499" style="color:#009688"
-                                          target="_black">hutool工具包</a></pre>
+        <pre class="my-code">更多帮助请查看文档：<a
+href="http://hutool.mydoc.io/#text_319499"
+style="color:#009688"
+                                          target="_black"
+        >hutool工具包</a></pre>
       </div>
     </el-tab-pane>
   </el-tabs>
@@ -30,7 +33,7 @@ import Send from './send'
 
 export default {
   name: 'Email',
-  components: {Config, Send},
+  components: { Config, Send },
   data() {
     return {
       activeName: 'second'

@@ -15,4 +15,4 @@ export function sync() {
   })
 }
 
-export default {del, sync}
+export default { del, sync }

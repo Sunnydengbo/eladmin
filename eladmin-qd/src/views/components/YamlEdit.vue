@@ -5,7 +5,7 @@
       <a href="https://github.com/codemirror/CodeMirror" target="_blank">CodeMirror</a>，
       主题预览地址 <a href="https://codemirror.net/demo/theme.html#idea" target="_blank">Theme</a>
     </p>
-    <Yaml :height="height" :value="value"/>
+    <Yaml :height="height" :value="value" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import Yaml from '@/components/YamlEdit/index'
 
 export default {
   name: 'YamlEdit',
-  components: {Yaml},
+  components: { Yaml },
   data() {
     return {
       height: document.documentElement.clientHeight - 210 + 'px',

@@ -7,5 +7,5 @@ const lang = {
   projects: 'פרויקטים',
   contributions: 'תרומות',
   about: 'תמצית'
-};
-export default lang;
+}
+export default lang
