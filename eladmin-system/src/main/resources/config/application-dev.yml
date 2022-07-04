@@ -4,30 +4,25 @@ spring:
     druid:
       db-type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
-      username: ${DB_USER:root}
-      password: ${DB_PWD:123456}
+      url: jdbc:log4jdbc:mysql://localhost:3306/eladmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+      username: root
+      password: root
       # 初始连接数
       initial-size: 5
       # 最小连接数
-      min-idle: 15
+      min-idle: 10
       # 最大连接数
-      max-active: 30
-      # 超时时间(以秒数为单位)
-      remove-abandoned-timeout: 180
+      max-active: 20
       # 获取连接超时时间
-      max-wait: 3000
+      max-wait: 5000
       # 连接有效性检测时间
       time-between-eviction-runs-millis: 60000
       # 连接在池中最小生存的时间
       min-evictable-idle-time-millis: 300000
       # 连接在池中最大生存的时间
       max-evictable-idle-time-millis: 900000
-      # 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除
       test-while-idle: true
-      # 指明是否在从池中取出连接前进行检验,如果检验失败, 则从池中去除连接并尝试取出另一个
-      test-on-borrow: true
-      # 是否在归还到池中前进行检验
+      test-on-borrow: false
       test-on-return: false
       # 检测连接是否有效
       validation-query: select 1
@@ -49,28 +44,11 @@ spring:
           config:
             multi-statement-allow: true
 
-# 登录相关配置
-login:
-  # 登录缓存
-  cache-enable: true
-  #  是否限制单用户登录
-  single-login: false
-  #  验证码
-  login-code:
-    #  验证码类型配置 查看 LoginProperties 类
-    code-type: arithmetic
-    #  登录图形验证码有效时间/分钟
-    expiration: 2
-    #  验证码高度
-    width: 111
-    #  验证码宽度
-    height: 36
-    # 内容长度
-    length: 2
-    # 字体名称，为空则使用默认字体
-    font-name:
-    # 字体大小
-    font-size: 25
+  #配置 Jpa
+  #jpa:
+    #hibernate:
+      # create初始化DB，生产环境设置成 none，避免程序运行时自动更新数据库结构
+      #ddl-auto: none
 
 #jwt
 jwt:
@@ -94,13 +72,16 @@ jwt:
 generator:
   enabled: true
 
+#如果生产环境要开启swagger，需要配置请求地址
+pringfox:
+  documentation:
+    swagger:
+      v2:
+        host: localhost:8080 # 接口域名或外网ip
+
 #是否开启 swagger-ui
 swagger:
   enabled: true
-
-# IP 本地解析
-ip:
-  local-parsing: true
 
 # 文件存储路径
 file:
@@ -116,3 +97,28 @@ file:
   # 文件大小 /M
   maxSize: 100
   avatarMaxSize: 5
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/**.xml
+   #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.admin.modules.system.model
+  global-config:
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: auto
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: 0
+      #驼峰下划线转换
+      column-underline: false
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      db-type: mysql
+    refresh: false
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    lazyLoadingEnabled: true #延时加载的开关
+    aggressiveLazyLoading: false
+    multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性

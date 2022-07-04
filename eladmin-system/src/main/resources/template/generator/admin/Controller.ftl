@@ -1,25 +1,11 @@
-/*
-*  Copyright 2019-2020 Zheng Jie
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*  http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-*/
-package ${package}.rest;
 
-import me.zhengjie.annotation.Log;
-import ${package}.domain.${className};
-import ${package}.service.${className}Service;
-import ${package}.service.dto.${className}QueryCriteria;
-import org.springframework.data.domain.Pageable;
+package ${package}.controller;
+
+import com.admin.annotation.Log;
+import ${package}.model.${className}Model;
+import ${package}.service.I${className}Service;
+import ${package}.service.dto.criteria.${className}QueryCriteria
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +17,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* @website https://el-admin.vip
 * @author ${author}
 * @date ${date}
 **/
@@ -41,13 +26,13 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/${changeClassName}")
 public class ${className}Controller {
 
-    private final ${className}Service ${changeClassName}Service;
+    private final I${className}Service ${changeClassName}Service;
 
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('${changeClassName}:list')")
-    public void export${className}(HttpServletResponse response, ${className}QueryCriteria criteria) throws IOException {
+    public void download(HttpServletResponse response, ${className}QueryCriteria criteria) throws IOException {
         ${changeClassName}Service.download(${changeClassName}Service.queryAll(criteria), response);
     }
 
@@ -55,15 +40,15 @@ public class ${className}Controller {
     @Log("查询${apiAlias}")
     @ApiOperation("查询${apiAlias}")
     @PreAuthorize("@el.check('${changeClassName}:list')")
-    public ResponseEntity<Object> query${className}(${className}QueryCriteria criteria, Pageable pageable){
-        return new ResponseEntity<>(${changeClassName}Service.queryAll(criteria,pageable),HttpStatus.OK);
+    public ResponseEntity<?> query(${className}QueryCriteria criteria, Page< ${className}Model> page){
+        return new ResponseEntity<>(${changeClassName}Service.queryAll(criteria,page),HttpStatus.OK);
     }
 
     @PostMapping
     @Log("新增${apiAlias}")
     @ApiOperation("新增${apiAlias}")
     @PreAuthorize("@el.check('${changeClassName}:add')")
-    public ResponseEntity<Object> create${className}(@Validated @RequestBody ${className} resources){
+    public ResponseEntity<?> create(@Validated @RequestBody ${className}Model resources){
         return new ResponseEntity<>(${changeClassName}Service.create(resources),HttpStatus.CREATED);
     }
 
@@ -71,16 +56,16 @@ public class ${className}Controller {
     @Log("修改${apiAlias}")
     @ApiOperation("修改${apiAlias}")
     @PreAuthorize("@el.check('${changeClassName}:edit')")
-    public ResponseEntity<Object> update${className}(@Validated @RequestBody ${className} resources){
+    public ResponseEntity<?> update(@Validated @RequestBody ${className}Model resources){
         ${changeClassName}Service.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping
     @Log("删除${apiAlias}")
     @ApiOperation("删除${apiAlias}")
     @PreAuthorize("@el.check('${changeClassName}:del')")
-    public ResponseEntity<Object> delete${className}(@RequestBody ${pkColumnType}[] ids) {
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestBody ${pkColumnType}[] ids) {
         ${changeClassName}Service.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

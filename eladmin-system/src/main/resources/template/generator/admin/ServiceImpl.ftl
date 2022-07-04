@@ -1,38 +1,29 @@
-/*
-*  Copyright 2019-2020 Zheng Jie
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*  http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-*/
+
 package ${package}.service.impl;
 
-import ${package}.domain.${className};
+import ${package}.model.${className}Model;
 <#if columns??>
     <#list columns as column>
         <#if column.columnKey = 'UNI'>
             <#if column_index = 1>
-import me.zhengjie.exception.EntityExistException;
+import com.admin.exception.EntityExistException;
             </#if>
         </#if>
     </#list>
 </#if>
-import me.zhengjie.utils.ValidationUtil;
-import me.zhengjie.utils.FileUtil;
+import com.admin.utils.ValidationUtil;
+import com.admin.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
-import ${package}.repository.${className}Repository;
-import ${package}.service.${className}Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import java.util.*;
+import ${package}.service.I${className}Service;
 import ${package}.service.dto.${className}Dto;
-import ${package}.service.dto.${className}QueryCriteria;
-import ${package}.service.mapstruct.${className}Mapper;
+import ${package}.service.dto.criteria.${className}QueryCriteria;
+import ${package}.mapper.I${className}Mapper;
+import com.admin.utils.DozerUtils;
+import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 <#if !auto && pkColumnType = 'Long'>
@@ -42,105 +33,113 @@ import cn.hutool.core.util.IdUtil;
 <#if !auto && pkColumnType = 'String'>
 import cn.hutool.core.util.IdUtil;
 </#if>
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
-import java.util.List;
-import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.admin.utils.PageUtil;
+
+import java.util.*;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
-* @website https://el-admin.vip
 * @description 服务实现
 * @author ${author}
 * @date ${date}
 **/
 @Service
 @RequiredArgsConstructor
-public class ${className}ServiceImpl implements ${className}Service {
+public class ${className}ServiceImpl extends ServiceImpl< I${className}Mapper, ${className}Model> implements I${className}Service {
 
-    private final ${className}Repository ${changeClassName}Repository;
-    private final ${className}Mapper ${changeClassName}Mapper;
+    // dozer做Model与DTO的转换
+    private final Mapper mapper;
 
     @Override
-    public Map<String,Object> queryAll(${className}QueryCriteria criteria, Pageable pageable){
-        Page<${className}> page = ${changeClassName}Repository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
-        return PageUtil.toPage(page.map(${changeClassName}Mapper::toDto));
+    public Map< String, Object> queryAll(${className}QueryCriteria criteria, Page pageable){
+        IPage< ${className}Model> page = this.page(pageable, buildWrapper(criteria));
+        List< ${className}Dto> dtoList = DozerUtils.mapList(mapper, page.getRecords(), ${className}Dto.class);
+        return PageUtil.toPage(dtoList, page.getTotal());
+    }
+
+    private QueryWrapper< ${className}Model> buildWrapper( ${className}QueryCriteria criteria) {
+        QueryWrapper< ${className}Model> query = null;
+        if (null != criteria) {
+            query = new QueryWrapper< ${className}Model>();
+        }
+        return query;
     }
 
     @Override
-    public List<${className}Dto> queryAll(${className}QueryCriteria criteria){
-        return ${changeClassName}Mapper.toDto(${changeClassName}Repository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder)));
+    public List< ${className}Dto> queryAll(${className}QueryCriteria criteria){
+        List< ${className}Model> ${changeClassName}s = this.list(buildWrapper(criteria));
+        return DozerUtils.mapList(mapper, ${changeClassName}s, ${className}Dto.class);
     }
 
     @Override
     @Transactional
     public ${className}Dto findById(${pkColumnType} ${pkChangeColName}) {
-        ${className} ${changeClassName} = ${changeClassName}Repository.findById(${pkChangeColName}).orElseGet(${className}::new);
-        ValidationUtil.isNull(${changeClassName}.get${pkCapitalColName}(),"${className}","${pkChangeColName}",${pkChangeColName});
-        return ${changeClassName}Mapper.toDto(${changeClassName});
+        ${className}Model ${changeClassName} = Optional.ofNullable(this.getById(${pkChangeColName})).orElseGet(${className}Model::new);
+        ValidationUtil.isNull(${changeClassName}.getId(),"${className}","${pkChangeColName}",${pkChangeColName});
+        return mapper.map(${changeClassName}, ${className}Dto.class);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ${className}Dto create(${className} resources) {
+    public Boolean create(${className}Model resources) {
 <#if !auto && pkColumnType = 'Long'>
         Snowflake snowflake = IdUtil.createSnowflake(1, 1);
-        resources.set${pkCapitalColName}(snowflake.nextId()); 
+        resources.set${pkCapitalColName}(snowflake.nextId());
 </#if>
 <#if !auto && pkColumnType = 'String'>
-        resources.set${pkCapitalColName}(IdUtil.simpleUUID()); 
+        resources.set${pkCapitalColName}(IdUtil.simpleUUID());
 </#if>
 <#if columns??>
     <#list columns as column>
     <#if column.columnKey = 'UNI'>
-        if(${changeClassName}Repository.findBy${column.capitalColumnName}(resources.get${column.capitalColumnName}()) != null){
-            throw new EntityExistException(${className}.class,"${column.columnName}",resources.get${column.capitalColumnName}());
+        QueryWrapper< ${className}Model> query = new QueryWrapper<>();
+        query.lambda().eq(${className}Model::get${column.capitalColumnName}, resources.get${column.capitalColumnName}());
+        if(this.getOne(query) != null){
+            throw new EntityExistException(${className}Model.class, "${column.columnName}", resources.get${column.capitalColumnName}());
         }
     </#if>
     </#list>
 </#if>
-        return ${changeClassName}Mapper.toDto(${changeClassName}Repository.save(resources));
+        return this.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(${className} resources) {
-        ${className} ${changeClassName} = ${changeClassName}Repository.findById(resources.get${pkCapitalColName}()).orElseGet(${className}::new);
-        ValidationUtil.isNull( ${changeClassName}.get${pkCapitalColName}(),"${className}","id",resources.get${pkCapitalColName}());
+    public void update(${className}Model resources) {
+        ${className}Model ${changeClassName} = Optional.ofNullable(this.getById(resources.getId())).orElseGet(${className}Model::new);
+        ValidationUtil.isNull(${changeClassName}.getId(), "${className}", "id", resources.getId());
 <#if columns??>
     <#list columns as column>
         <#if column.columnKey = 'UNI'>
         <#if column_index = 1>
-        ${className} ${changeClassName}1 = null;
+        ${className}Model ${changeClassName}1 = null;
         </#if>
-        ${changeClassName}1 = ${changeClassName}Repository.findBy${column.capitalColumnName}(resources.get${column.capitalColumnName}());
+        QueryWrapper< ${className}Model> query = new QueryWrapper<>();
+        query.lambda().eq(${className}Model::get${column.capitalColumnName}, resources.get${column.capitalColumnName}());
+        ${changeClassName}1 = this.getOne(query);
         if(${changeClassName}1 != null && !${changeClassName}1.get${pkCapitalColName}().equals(${changeClassName}.get${pkCapitalColName}())){
-            throw new EntityExistException(${className}.class,"${column.columnName}",resources.get${column.capitalColumnName}());
+            throw new EntityExistException(${className}Model.class, "${column.columnName}", resources.get${column.capitalColumnName}());
         }
         </#if>
     </#list>
 </#if>
-        ${changeClassName}.copy(resources);
-        ${changeClassName}Repository.save(${changeClassName});
+        ${changeClassName} = mapper.map(resources, ${className}Model.class);
+        this.saveOrUpdate(${changeClassName});
     }
 
     @Override
-    public void deleteAll(${pkColumnType}[] ids) {
-        for (${pkColumnType} ${pkChangeColName} : ids) {
-            ${changeClassName}Repository.deleteById(${pkChangeColName});
-        }
+    public void deleteAll(${pkColumnType}[ ] ids) {
+        this.removeByIds(Arrays.asList(ids));
     }
 
     @Override
-    public void download(List<${className}Dto> all, HttpServletResponse response) throws IOException {
-        List<Map<String, Object>> list = new ArrayList<>();
+    public void download(List< ${className}Dto> all, HttpServletResponse response) throws IOException {
+        List< Map< String, Object>> list = new ArrayList<>();
         for (${className}Dto ${changeClassName} : all) {
-            Map<String,Object> map = new LinkedHashMap<>();
+            Map< String,Object> map = new LinkedHashMap<>();
         <#list columns as column>
             <#if column.columnKey != 'PRI'>
             <#if column.remark != ''>

@@ -4,15 +4,15 @@ spring:
     druid:
       db-type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
-      username: ${DB_USER:root}
-      password: ${DB_PWD:123456}
+      url: jdbc:log4jdbc:mysql://localhost:3306/eladmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+      username: root
+      password: root
       # 初始连接数
       initial-size: 5
       # 最小连接数
-      min-idle: 15
+      min-idle: 10
       # 最大连接数
-      max-active: 30
+      max-active: 20
       # 获取连接超时时间
       max-wait: 5000
       # 连接有效性检测时间
@@ -21,11 +21,8 @@ spring:
       min-evictable-idle-time-millis: 300000
       # 连接在池中最大生存的时间
       max-evictable-idle-time-millis: 900000
-      # 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除
       test-while-idle: true
-      # 指明是否在从池中取出连接前进行检验,如果检验失败, 则从池中去除连接并尝试取出另一个
-      test-on-borrow: true
-      # 是否在归还到池中前进行检验
+      test-on-borrow: false
       test-on-return: false
       # 检测连接是否有效
       validation-query: select 1
@@ -34,7 +31,6 @@ spring:
         enabled: true
       stat-view-servlet:
         enabled: true
-        # 控制台管理用户名和密码
         url-pattern: /druid/*
         reset-enable: false
         login-username: admin
@@ -50,28 +46,11 @@ spring:
           config:
             multi-statement-allow: true
 
-# 登录相关配置
-login:
-  # 登录缓存
-  cache-enable: true
-  #  是否限制单用户登录
-  single-login: false
-  #  验证码
-  login-code:
-    #  验证码类型配置 查看 LoginProperties 类
-    code-type: arithmetic
-    #  登录图形验证码有效时间/分钟
-    expiration: 2
-    #  验证码高度
-    width: 111
-    #  验证码宽度
-    height: 36
-    # 内容长度
-    length: 2
-    # 字体名称，为空则使用默认字体，如遇到线上乱码，设置其他字体即可
-    font-name:
-    # 字体大小
-    font-size: 25
+  #配置 Jpa
+  #jpa:
+    #hibernate:
+      # 生产环境设置成 none，避免程序运行时自动更新数据库结构
+      #ddl-auto: none
 
 #jwt
 jwt:
@@ -90,10 +69,6 @@ jwt:
   detect: 1800000
   # 续期时间范围，默认 1小时，这里单位毫秒
   renew: 3600000
-
-# IP 本地解析
-ip:
-  local-parsing: false
 
 #是否允许生成代码，生产环境设置为false
 generator:

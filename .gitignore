@@ -3,5 +3,4 @@
 *.iml
 */target/*
 */*.iml
-/.gradle/
-/application.pid
+.settings/
