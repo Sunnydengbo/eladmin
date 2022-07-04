@@ -1,6 +1,0 @@
-<application>
-  <component name="ExternalResourceManagerImpl">
-    <resource url="http://mybatis.org/dtd/mybatis-3-mapper.dtd" location="$USER_HOME$/AppData/Local/JetBrains/IntelliJIdea2021.1/extResources/b36fadae_mybatis-3-mapper.dtd" />
-    <ignored-resource url="http://maven.apache.org/SETTINGS/1.2.0" />
-  </component>
-</application>
