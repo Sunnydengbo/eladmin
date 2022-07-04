@@ -2,12 +2,12 @@
 
 #### 声明
 1. 本项目修改自[Elune/eladmin](https://gitee.com/elunez/eladmin)，以下为原版项目详情，供大家学习交流，记于此，共勉之！
-2. 本项目将原版后端中的Spring Boot Jpa + mapstruct替换为mybatis plus + dozer，更新于2020.5.30，master原框架保留，mybatis分支已删除JPA、mapstruct
-3. 前端更新于2020.5.30
+2. 本项目将原版后端中的Spring Boot Jpa + mapstruct替换为mybatis plus + dozer，mybatis分支已删除JPA、mapstruct
+3. 本项目采用前后端分离 后端eladmin 前端eladmin-qd放在统一目录中
 
 |     |   后端源码  |   前端源码  |
 |---  |--- | --- |
-|  码云   |  https://gitee.com/adyfang/eladmin   |  https://gitee.com/adyfang/eladmin-web   |
+|  码云   |  https://gitee.com/Sunnydengbo/eladmin   | 
 
 <div style="text-align: center">
 
