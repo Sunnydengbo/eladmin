@@ -53,7 +53,7 @@
 
 <script>
 import crudLog from '@/api/log'
-import CRUD, { presenter, header, form, crud } from '@crud/crud'
+import CRUD, {crud, form, header, presenter} from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
@@ -74,8 +74,8 @@ export default {
         edit: ['admin', 'log:edit'],
         del: ['admin', 'log:del']
       },
-      rules: {
-      }    }
+      rules: {}
+    }
   },
   methods: {
     // 钩子：在获取表格数据之前执行，false 则代表不获取数据
