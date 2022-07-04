@@ -1,0 +1,71 @@
+<application>
+  <component name="AppStorage">
+    <option name="newTranslationDialogWidth" value="592" />
+    <option name="newTranslationDialogX" value="782" />
+    <option name="newTranslationDialogY" value="428" />
+    <histories>
+      <item value="Query Criteria" />
+      <item value="clustered" />
+      <item value="persistence" />
+      <item value="Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally." />
+      <item value="OT STARTED. Currently in standby mode. Number of jobs executed: 0 Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads. Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered." />
+      <item value="Quartz Scheduler" />
+      <item value="Persistence Exception" />
+      <item value="The injection point has the following annotations:" />
+      <item value="Parameter 2 of constructor in com.admin.modules.system.service.impl.AdminDeptServiceImpl required a bean of type 'com.admin.modules.system.mapper.IUserMapper' that could not be found." />
+      <item value="Consider defining a bean of type 'com.example.service.UserService' in your configuration." />
+      <item value="Note: only one @Configuration class may have the @EnableWebMvc annotation to import the Spring Web MVC configuration. There can however be multiple @Configuration classes implementing WebMvcConfigurer in order to customize the provided configuration. If WebMvcConfigurer does not expose some more advanced setting that needs to be configured, consider removing the @EnableWebMvc annotation and extending directly from WebMvcConfigurationSupport or DelegatingWebMvcConfiguration, e.g.:" />
+      <item value="WebMvcConfigurer, WebMvcConfigurationSupport, DelegatingWebMvcConfiguration" />
+      <item value="Indicates that Swagger support should be enabled. This should be applied to a Spring java config and should have an accompanying '@Configuration' annotation. Loads all required beans defined in @see SpringSwaggerConfig" />
+      <item value="Duplicate Key" />
+      <item value="确认提交" />
+      <item value="Duplicate" />
+      <item value="Predicate" />
+      <item value="Returns a stream consisting of the elements of this stream that match the given predicate. This is an intermediate operation. 参数: predicate – a non-interfering, stateless predicate to apply to each element to determine if it should be included 返回值: the new stream" />
+      <item value="This annotation commonly works with thread-bound transactions managed by a org.springframework.transaction.PlatformTransactionManager, exposing a transaction to all data access operations within the current execution thread. Note: This does NOT propagate to newly started threads within the method. Alternatively, this annotation may demarcate a reactive transaction managed by a org.springframework.transaction.ReactiveTransactionManager which uses the Reactor context instead of thread-local variables. As a consequence, all participating data access operations need to execute within the same Reactor context in the same reactive pipeline." />
+      <item value="Transactional" />
+      <item value="lear" />
+      <item value="unmet peer dependency" />
+      <item value="order" />
+      <item value="manual" />
+      <item value="syntax" />
+      <item value="get Half Checked Keys" />
+      <item value="Critical" />
+      <item value="signature Map" />
+      <item value="nested" />
+      <item value="resolve" />
+      <item value="alias" />
+      <item value="nested exception is java.lang.IllegalStateException" />
+      <item value="Illegal State Exception" />
+      <item value="java.lang.IllegalStateException: Failed to load ApplicationContext" />
+      <item value="The injection point has the following annotations: - @org.springframework.beans.factory.annotation.Autowired(required=true)" />
+      <item value="Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'interceptorConfig':" />
+      <item value="No qualifying bean of type 'com.sunny.springbootstudy.mapper.UserMapper'" />
+      <item value="A component required a bean of type 'com.sunny.springbootstudy.mapper.UserMapper' that could not be found." />
+      <item value="Consider defining a bean of type 'com.sunny.springbootstudy.mapper.UserMapper' in your configuration." />
+      <item value="Consider" />
+      <item value="File Entity" />
+      <item value="Handler Interceptor" />
+      <item value="Draw Billboard" />
+      <item value="指令" />
+      <item value="开启键盘漫游" />
+      <item value="移动到此处" />
+      <item value="允许进入地下" />
+      <item value="场景出图" />
+      <item value="开启大气渲染" />
+      <item value="开启拾取高亮" />
+    </histories>
+    <option name="languageScores">
+      <map>
+        <entry key="CHINESE" value="116" />
+        <entry key="ENGLISH" value="117" />
+      </map>
+    </option>
+  </component>
+  <component name="Cache">
+    <option name="lastTrimTime" value="1656739186643" />
+  </component>
+  <component name="Settings">
+    <option name="translateDocumentation" value="true" />
+  </component>
+</application>
